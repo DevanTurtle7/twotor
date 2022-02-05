@@ -27,6 +27,7 @@ function SubjectForm(props) {
             const index = props.index
             let complete = selected.size > 0
             props.setComplete(index, complete)
+            props.callback(selected)
         }
     })
 

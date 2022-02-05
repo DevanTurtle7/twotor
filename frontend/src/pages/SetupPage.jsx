@@ -7,6 +7,8 @@ const MAX_INDEX = 2;
 
 function SetupPage(props) {
     const [index, setIndex] = useState(0);
+    const [canHelp, setCanHelp] = useState(new Set())
+    const [helpWith, setHelpWith] = useState(new Set())
     const [completedForms, setCompletedForms] = useState({
         0: false,
         1: false
@@ -48,12 +50,20 @@ function SetupPage(props) {
 
     const getButtonText = () => index === MAX_INDEX ? "Finish" : "Next"
 
+    const helpWithUpdated = (data) => {
+        setHelpWith(data)
+    }
+    
+    const canHelpUpdated = (data) => {
+        setCanHelp(data)
+    }
+
     return (
         <div className='page-col' id='setup-page'>
             <div className='form-container'>
                 <UniversityForm index={0} current={index} setComplete={setComplete} />
-                <CourseForm index={1} current={index} setComplete={setComplete} text="Select Courses You Want Help With"/>
-                <CourseForm index={2} current={index} setComplete={setComplete} text="Select Courses You Can Help Others With"/>
+                <CourseForm index={1} current={index} setComplete={setComplete} callback={helpWithUpdated} text="Select Courses You Want Help With"/>
+                <CourseForm index={2} current={index} setComplete={setComplete} callback={canHelpUpdated} text="Select Courses You Can Help Others With"/>
             </div>
 
             <div className='form-footer'>
