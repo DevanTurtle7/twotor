@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request, make_response
 import secrets
 from hashlib import sha512
+
 from backend.database.db_auth import *
 
 
@@ -31,11 +32,11 @@ def validate(username, password):
     return hash_password(username, password) == get_password_hash(username)
 
 
-# def validate_new(username, email):
-#     """
-#     Check if username and email are not already used
-#     """
-#     return username_email_exist(username, email) = False
+ def validate_new(username, email):
+     """
+     Check if username and email are not already used
+     """
+     return username_email_exist(username, email) = False
 
 
 class Login(Resource):
