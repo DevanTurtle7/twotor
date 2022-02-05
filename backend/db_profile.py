@@ -1,13 +1,8 @@
-from flask import request, Response
-from flask_restful import Resource
+from database import db
 
-
-def set_up_profile(university, need_help, can_tutor):
+# adds university, classes that need help, and classes that can be tutored to the DB
+def set_up_account(university, need_help, can_tutor):
     sql = """
-        INSERT INTO profile
-        (university, need_help, can_tutor)
-        VALUES (%s, %s, %s)
-        RETURNING id;
         """
-    params = [university, need_help, can_tutor]
-    return
+    params = [university]
+    return db.exec_commit_r(sql, params)[0][0]
