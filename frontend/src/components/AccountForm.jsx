@@ -14,6 +14,11 @@ function AccountForm(props) {
             let valid = validEmail() && validUsername() && validPassword()
             let index = props.index
             props.setComplete(index, valid)
+            props.callback({
+                email: email,
+                username: username,
+                password: password
+            })
         }
     })
 
