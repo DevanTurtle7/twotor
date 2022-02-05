@@ -45,7 +45,7 @@ function HomePage(props) {
 
             <h2>Help a Student</h2>
             <div className='cards-row'>
-            {createCards()}
+                {createCards()}
             </div>
         </div>
     )

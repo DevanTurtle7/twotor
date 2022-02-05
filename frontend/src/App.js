@@ -1,6 +1,7 @@
 import SetupPage from './pages/SetupPage';
 import WelcomePage from './pages/WelcomePage';
 import HomePage from './pages/HomePage';
+import ChatPage from './pages/ChatPage';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path='/' element={<WelcomePage />} />
                 <Route exact path='/createAccount' element={<SetupPage universities={universities} />} />
                 <Route exact path='/home' element={<HomePage/>} />
+                <Route exact path='/chat' element={<ChatPage/>} />
             </Routes>
         </Router>
     );

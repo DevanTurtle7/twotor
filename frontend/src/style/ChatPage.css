@@ -1,0 +1,82 @@
+#chat-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+
+#chat-history {
+    display: flex;
+    flex-flow: column;
+}
+
+#message-bar {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.circle-button {
+    font-size: 22px;
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    border-radius: 100px !important;
+    width: 45px;
+    height: 45px;
+    padding: 0px;
+    text-align: center;
+}
+
+#button-container {
+    width: fit-content;
+    height: fit-content;
+}
+
+#message-input {
+    border-radius: 45px !important;
+    height: 45px;
+}
+
+#input-container {
+    width: 80vw;
+    margin-right: 5px;
+}
+
+.chat-bubble {
+    max-width: 70vw;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 5px;
+    margin-bottom: 1px;
+}
+
+.chat-bubble p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.chat-bubble.sent {
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+}
+
+.chat-bubble.recieved {
+    background-color: var(--secondary-bg-color);
+    color: var(--secondary-text-color);
+}
+
+.chat-bubble.first {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.chat-bubble.last {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
