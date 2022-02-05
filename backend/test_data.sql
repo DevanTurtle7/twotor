@@ -50,10 +50,29 @@ VALUES ('Megan', 'Chang', 'corey15@example.com', 1, 'MeganChang',
         '3fa3a051e52ab6a029f9b482f951d541fe9a358c96695385493711667f15de8f161347cb17a15cb6ab9e87b7b72745a305dbd1ddd8e0cf084322ca4c0160f580'); -- Password: )n0myBpxyn
 
 INSERT INTO help_queue (user_id, course_id, description)
-VALUES
-       (1, 1, 'Having issues with using React'),
-       (2, 1, 'Having issues with using Flask') ,
+VALUES (1, 1, 'Having issues with using React'),
+       (2, 1, 'Having issues with using Flask'),
        (3, 3, 'Integrals'),
+       (6, 3, 'Derivatives'),
+       (7, 3, 'I hate this class'),
        (4, 5, 'Pointers are giving me trouble...');
+
+INSERT INTO need_help (user_id, course_id)
+VALUES (1, 1),
+       (2, 1),
+       (3, 3),
+       (6, 3),
+       (7, 3),
+       (4, 5);
+
+INSERT INTO can_tutor (user_id, course_id)
+VALUES (1, 3),
+       (2, 6),
+       (3, 7),
+       (6, 8),
+       (7, 6),
+       (4, 6);
+
+
 
 
