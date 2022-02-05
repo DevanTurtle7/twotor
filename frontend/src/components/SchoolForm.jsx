@@ -8,7 +8,7 @@ function SchoolForm(props) {
 
     return (
         <FormWrapper index={props.index} current={props.current}>
-            <h2>Select your university</h2>
+            <h2>Select Your University</h2>
 
             <select onChange={onChange} defaultValue={"DEFAULT"}>
                 <option value="DEFAULT" disabled>Select your university...</option>

@@ -85,7 +85,8 @@ function SubjectForm(props) {
 
     return (
         <FormWrapper index={props.index} current={props.current}>
-            <h2>Select your courses...</h2>
+        <div className='subject-form'>
+            <h2>Select Courses You Want Help With</h2>
 
             <select onChange={onChange} defaultValue={"DEFAULT"}>
                 <option value="DEFAULT" disabled>Select subject...</option>
@@ -105,6 +106,7 @@ function SubjectForm(props) {
             <div className='selected-chip-container'>
                 {getSelectedChips()}
             </div>
+        </div>
         </FormWrapper>
     )
 }
