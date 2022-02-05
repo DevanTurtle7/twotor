@@ -3,7 +3,8 @@ from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
 
 from auth import Login, CreateAccount, Logout
-from welcome_api import ListSubjects, ListCourses, ListUniversities, ListQueue
+from welcome_api import ListSubjects, ListCourses, ListUniversities
+from queue import ListQueue
 
 app = Flask(__name__)
 cors = CORS(app)

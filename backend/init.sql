@@ -49,5 +49,6 @@ CREATE TABLE can_tutor (
 CREATE TABLE help_queue (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES accounts ON DELETE CASCADE,
-    course_id INTEGER REFERENCES courses ON DELETE CASCADE
+    course_id INTEGER REFERENCES courses ON DELETE CASCADE,
+    description TEXT
 );

@@ -130,3 +130,4 @@ def create_can_tutor(user_id, courses):
     params = [(user_id, x) for x in courses]
     cur = db.conn.cursor()
     return execute_values(cur, sql, params)
+
