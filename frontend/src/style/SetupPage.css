@@ -1,0 +1,60 @@
+.form-container {
+    display: grid;
+    height: inherit;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    transition: left .5s;
+    height: fit-content;
+}
+
+.form-footer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.form-active {
+    left: 0vw;
+}
+
+.form-prev {
+    left: -100vw;
+}
+
+.form-next {
+    left: 100vw;
+}
+
+#setup-page {
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.chip-container, .selected-chip-container {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+.subject-form {
+    max-width: 400px;
+}
+
+#selected-courses-label {
+    margin-top: 50px;
+}
+
+.create-account-form-group {
+    margin-top: 15px;
+    margin-bottom: 40px;
+}
