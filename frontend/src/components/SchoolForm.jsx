@@ -1,10 +1,3 @@
-import { useState } from "react";
-import {
-    Dropdown,
-    DropdownMenu,
-    DropdownToggle,
-    DropdownItem
-} from "reactstrap";
 import FormWrapper from "./FormWrapper";
 
 function SchoolForm(props) {
@@ -17,9 +10,9 @@ function SchoolForm(props) {
         <FormWrapper index={props.index} current={props.current}>
             <h2>Select your university</h2>
 
-            <select onChange={onChange}>
-                <option value="" disabled selected>Select your university...</option>
-                <option>Rochester Institute of Technology</option>
+            <select onChange={onChange} defaultValue={"DEFAULT"}>
+                <option value="DEFAULT" disabled>Select your university...</option>
+                <option value="rit">Rochester Institute of Technology</option>
             </select>
         </FormWrapper>
     )
