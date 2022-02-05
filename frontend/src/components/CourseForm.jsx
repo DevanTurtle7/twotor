@@ -113,7 +113,7 @@ function SubjectForm(props) {
             <div className='subject-form'>
                 <h2>{props.text}</h2>
 
-                <select onChange={onChange} defaultValue={"DEFAULT"}>
+                <select tabIndex={-1} onChange={onChange} defaultValue={"DEFAULT"}>
                     <option value="DEFAULT" disabled>Select subject...</option>
                     {getOptions()}
                 </select>

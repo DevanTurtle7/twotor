@@ -3,13 +3,15 @@
     height: inherit;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .form {
+    display: block;
     grid-column: 1;
     grid-row: 1;
     position: relative;
-    transition: left .5s;
+    transition: left .5s, display 2s linear;
     height: fit-content;
 }
 

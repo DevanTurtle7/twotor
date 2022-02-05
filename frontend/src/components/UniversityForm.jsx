@@ -26,7 +26,7 @@ function SchoolForm(props) {
         <FormWrapper index={props.index} current={props.current}>
             <h2>Select Your University</h2>
 
-            <select onChange={onChange} defaultValue={"DEFAULT"}>
+            <select tabIndex={-1} onChange={onChange} defaultValue={"DEFAULT"}>
                 <option value="DEFAULT" disabled>Select your university...</option>
                 {getOptions()}
             </select>
