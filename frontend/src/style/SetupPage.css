@@ -5,4 +5,33 @@
 .form {
     grid-column: 1;
     grid-row: 1;
+    position: relative;
+    transition: left 1s;
+}
+
+.form-footer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.form-active {
+    left: 0vw;
+}
+
+.form-prev {
+    left: -100vw;
+}
+
+.form-next {
+    left: 100vw;
+}
+
+#setup-page {
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }

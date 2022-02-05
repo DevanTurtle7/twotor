@@ -1,8 +1,11 @@
+import FormWrapper from './FormWrapper';
 
 function SubjectForm(props) {
-    return <div className='form'>
-    <h1>This is my other ajslkdjlaksjdklajl</h1>
-    </div>
+    return (
+        <FormWrapper index={props.index} current={props.current}>
+            <h1>This aldkjaskldjlaksjdkl </h1>
+        </FormWrapper>
+    )
 }
 
 export default SubjectForm;
