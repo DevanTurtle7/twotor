@@ -1,5 +1,7 @@
 import { Button } from 'reactstrap';
 import SetupPage from './pages/SetupPage';
+import WelcomePage from './pages/WelcomePage'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
     const getUniversities = () => {
@@ -10,9 +12,12 @@ function App() {
     }
 
     return (
-        <div>
-            <SetupPage universities={getUniversities()}/>
-        </div>
+        <Router>
+            <Routes>
+                <Route exact path='/' element={<WelcomePage />} />
+                <Route exact path='/createAccount' element={<SetupPage universities={getUniversities()} />} />
+            </Routes>
+        </Router>
     );
 }
 
