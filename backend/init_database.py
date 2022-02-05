@@ -1,3 +1,3 @@
-from database.database import db
+from database import db
 
 db.exec_sql_file('init.sql')

@@ -6,7 +6,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor, DictCursor
 
 # Get database connection information
-CONFIG = "backend/database/config.ini"
+CONFIG = "backend/config.ini"
 config = ConfigParser()
 config.read(CONFIG)
 

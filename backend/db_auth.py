@@ -1,5 +1,46 @@
-from backend.database.database import db
-from backend.api.auth import generate_salt, hash_password_with_salt
+import secrets
+from hashlib import sha512
+
+from database import db
+
+
+def generate_session_key():
+    """
+    Generates a 32 character url safe token
+    for use as a browser session key
+    """
+    return secrets.token_urlsafe(24)
+
+
+def generate_salt():
+    """
+    Internal method to generate a salt for a new user in the database
+    128 chars for increased security
+    """
+    return secrets.token_hex(64)
+
+
+def hash_password_with_salt(salt, password):
+    combined_str = salt + password
+    return sha512(combined_str.encode("utf-8")).hexdigest()
+
+
+def hash_password(username, password):
+    """Generate the sha512 hash of the salt + password
+
+    Returns:
+        str: sha512 hash (128 chars)
+    """
+    salt = get_salt(username)
+    combined_str = salt + password
+    return sha512(combined_str.encode("utf-8")).hexdigest()
+
+
+def validate(username, password):
+    """
+    Check if username and password combo is valid
+    """
+    return hash_password(username, password) == get_password_hash(username)
 
 
 def get_salt(username):

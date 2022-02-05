@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api
 
-from api.auth import Login, CreateAccount
+from auth import Login, CreateAccount
 
 app = Flask(__name__)
 api = Api(app)
