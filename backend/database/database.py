@@ -6,9 +6,11 @@ import psycopg2
 from psycopg2.extras import RealDictCursor, DictCursor
 
 # Get database connection information
-CONFIG = "database/config.ini"
+CONFIG = "backend/database/config.ini"
 config = ConfigParser()
 config.read(CONFIG)
+
+print(os.getcwd())
 
 DATABASE = config["postgres"]["database"]
 USERNAME = config["postgres"]["username"]
