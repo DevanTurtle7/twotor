@@ -27,7 +27,7 @@ body {
     padding-left: 10px;
     padding-top: 2px;
     padding-bottom: 4px;
-    margin-right: 8px;
+    margin-right: 4px;
     margin-top: 4px;
     height: 30.5px;
 }
@@ -48,4 +48,8 @@ body {
     display: flex;
     flex-flow: column;
     justify-content: center;
+}
+
+.clickable:hover {
+    cursor: pointer;
 }

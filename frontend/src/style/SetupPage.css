@@ -38,3 +38,10 @@
     flex-flow: column;
     justify-content: space-between;
 }
+
+.chip-container {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    max-width: 400px;
+}
