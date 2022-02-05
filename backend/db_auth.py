@@ -40,7 +40,13 @@ def validate(username, password):
     """
     Check if username and password combo is valid
     """
-    return hash_password(username, password) == get_password_hash(username)
+    password_hash = get_password_hash(username)
+    if password_hash is None:
+        return False
+    else:
+        password_hash = password_hash[0]
+
+    return hash_password(username, password) == password_hash
 
 
 def get_salt(username):
@@ -50,7 +56,7 @@ def get_salt(username):
 
 def get_password_hash(username):
     sql = """SELECT password FROM accounts WHERE username = %s;"""
-    return db.exec_get_one(sql, username)[0]
+    return db.exec_get_one(sql, username)
 
 
 def update_session_key(username, new_session_key):
