@@ -107,3 +107,8 @@ button {
     background-color: var(--secondary-bg-color-disabled);
     color: var(--secondary-text-color-disabled)
 }
+
+select {
+    margin-bottom: 10px !important;
+    margin-top: 5px !important;
+}
