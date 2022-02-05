@@ -3,6 +3,8 @@ import { Input, FormGroup } from 'reactstrap'
 import { useEffect, useState } from "react"
 
 function AccountForm(props) {
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -11,16 +13,28 @@ function AccountForm(props) {
     useEffect(() => {
         if (needUpdated) {
             setNeedUpdate(false)
-            let valid = validEmail() && validUsername() && validPassword()
+            let valid = validEmail() && validUsername() && validPassword() && validFirstName() && validLastName()
             let index = props.index
             props.setComplete(index, valid)
             props.callback({
+                first_name: firstName,
+                last_name: lastName,
                 email: email,
                 username: username,
                 password: password
             })
         }
     })
+
+    const firstNameUpdated = (e) => {
+        setFirstName(e.target.value)
+        setNeedUpdate(true)
+    }
+
+    const lastNameUpdated = (e) => {
+        setLastName(e.target.value)
+        setNeedUpdate(true)
+    }
 
     const emailUpdated = (e) => {
         setEmail(e.target.value)
@@ -35,6 +49,14 @@ function AccountForm(props) {
     const passwordUpdated = (e) => {
         setPassword(e.target.value)
         setNeedUpdate(true)
+    }
+
+    const validFirstName = () => {
+        return firstName !== ""
+    }
+
+    const validLastName = () => {
+        return lastName !== ""
     }
 
     const validEmail = () => {
@@ -53,6 +75,17 @@ function AccountForm(props) {
         <FormWrapper index={props.index} current={props.current}>
             <div>
                 <h2>Create Account</h2>
+
+                <div className="create-account-form-group form-group-split">
+                    <FormGroup>
+                        <h4>First name</h4>
+                        <Input type="text" onChange={firstNameUpdated}></Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <h4>Last name</h4>
+                        <Input type="text" onChange={lastNameUpdated}></Input>
+                    </FormGroup>
+                </div>
 
                 <div className="create-account-form-group">
                     <FormGroup>

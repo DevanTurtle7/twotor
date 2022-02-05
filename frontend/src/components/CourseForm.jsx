@@ -58,7 +58,7 @@ function SubjectForm(props) {
             }
         }
 
-        if (subject != null && subjectCode != undefined) {
+        if (subject !== null && subjectCode !== undefined) {
             for (let i = 0; i < courses.length; i++) {
                 let current = courses[i]
                 let number = current.number

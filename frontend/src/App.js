@@ -1,4 +1,3 @@
-import { Button } from 'reactstrap';
 import SetupPage from './pages/SetupPage';
 import WelcomePage from './pages/WelcomePage'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';

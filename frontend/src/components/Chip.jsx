@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { IoIosCloseCircle } from 'react-icons/io';
 
 function Chip(props) {
@@ -27,7 +26,7 @@ function Chip(props) {
     }
 
     const onDelete = () => {
-        if (props.onDelete != undefined) {
+        if (props.onDelete !== undefined) {
             props.onDelete(props.text)
         }
     }
