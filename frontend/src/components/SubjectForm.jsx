@@ -14,16 +14,21 @@ const SUBJECTS = {
 function SubjectForm(props) {
     const [subject, setSubject] = useState(null)
     const [selected, setSelected] = useState(new Set())
+    const [needUpdate, setNeedUpdate] = useState(false)
 
     const onChange = (e) => {
         setSubject(e.target.value)
     }
 
-    const updateComplete = () => {
-        const index = props.index
-        let complete = selected.size > 0
-        props.setComplete(index, complete)
-    }
+    useEffect(() => {
+        if (needUpdate) {
+            setNeedUpdate(false)
+
+            const index = props.index
+            let complete = selected.size > 0
+            props.setComplete(index, complete)
+        }
+    })
 
     const toggleCourse = (courseName) => {
         if (selected.has(courseName)) {
@@ -31,13 +36,12 @@ function SubjectForm(props) {
         } else {
             setSelected(prev => new Set(prev.add(courseName)))
         }
-
-        updateComplete()
+        setNeedUpdate(true)
     }
 
     const removeCourse = (courseName) => {
         setSelected(prev => new Set([...prev].filter(x => x !== courseName)))
-        updateComplete()
+        setNeedUpdate(true)
     }
 
     const getChips = () => {

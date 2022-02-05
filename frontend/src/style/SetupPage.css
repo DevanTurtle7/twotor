@@ -2,6 +2,7 @@
     display: grid;
     height: inherit;
     align-items: center;
+    justify-content: center;
 }
 
 .form {
