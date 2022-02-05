@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 #root {
-    --chip-text-color: rgb(100, 100, 100);
-    --chip-bg-color: rgb(235, 235, 235);
-    --chip-active-text-color: #0288D1;
-    --chip-active-bg-color: #B3E5FC;
+    --secondary-text-color: rgb(100, 100, 100);
+    --secondary-bg-color: rgb(235, 235, 235);
+    --secondary-text-color-disabled: rgb(100, 100, 100, .5);
+    --secondary-bg-color-disabled: rgb(235, 235, 235, .5);
+    --primary-text-color: rgb(2, 136, 209);
+    --primary-bg-color: rgb(179, 229, 252);
+    --primary-text-color-disabled: rgba(2, 136, 209, .5);
+    --primary-bg-color-disabled: rgba(179, 229, 252, .5);
 }
 
 body {
@@ -20,7 +24,7 @@ body {
 }
 
 .chip {
-    background-color: var(--chip-bg-color);
+    background-color: var(--secondary-bg-color);
     border-radius: 100px;
     width: fit-content;
     padding-right: 10px;
@@ -37,31 +41,30 @@ body {
 }
 
 .chip-active {
-    background-color: var(--chip-active-bg-color);
+    background-color: var(--primary-bg-color);
 }
 
 .chip-active .chip-text {
-    color: var(--chip-active-text-color)
+    color: var(--primary-text-color)
 }
 
 .chip .chip-delete-icon {
     margin-right: 4px;
-    color: var(--chip-text-color)
+    color: var(--secondary-text-color)
 }
 
 .chip-active .chip-delete-icon {
-    color: var(--chip-active-text-color)
+    color: var(--primary-text-color)
 }
 
 .chip-text {
     margin: 0;
     font-size: 15px !important;
-    color: var(--chip-text-color);
+    color: var(--secondary-text-color);
     transition: color .3s;
 }
 
 .page-col {
-    max-width: 1000px;
     margin-left: 100px;
     margin-right: 100px;
 }
@@ -74,4 +77,33 @@ body {
 
 .clickable:hover {
     cursor: pointer;
+}
+
+button {
+    border-radius: 4px !important;
+    border: none;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.button-primary {
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color)
+}
+
+.button-secondary {
+    background-color: var(--secondary-bg-color);
+    color: var(--secondary-text-color)
+}
+
+.button-primary:disabled {
+    background-color: var(--primary-bg-color-disabled);
+    color: var(--primary-text-color-disabled);
+}
+
+.button-secondary:disabled {
+    background-color: var(--secondary-bg-color-disabled);
+    color: var(--secondary-text-color-disabled)
 }
