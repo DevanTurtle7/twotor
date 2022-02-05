@@ -84,6 +84,18 @@ function SubjectForm(props) {
         return chips
     }
 
+    const getOptions = () => {
+        const options = []
+        let keys = Object.keys(SUBJECTS)
+
+        for (let i = 0; i < keys.length; i++) {
+            let current = keys[i]
+            options.push(<option value={current} key={current}>{current}</option>)
+        }
+
+        return options
+    }
+
     return (
         <FormWrapper index={props.index} current={props.current}>
         <div className='subject-form'>
@@ -91,12 +103,7 @@ function SubjectForm(props) {
 
             <select onChange={onChange} defaultValue={"DEFAULT"}>
                 <option value="DEFAULT" disabled>Select subject...</option>
-                <option value="SWEN">SWEN</option>
-                <option value="GCIS">GCIS</option>
-                <option value="MATH">MATH</option>
-                <option value="ISTE">ISTE</option>
-                <option value="STSO">STSO</option>
-                <option value="CSEC">CSEC</option>
+                {getOptions()}
             </select>
 
             <div className='chip-container'>
