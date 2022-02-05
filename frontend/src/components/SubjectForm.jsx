@@ -19,17 +19,25 @@ function SubjectForm(props) {
         setSubject(e.target.value)
     }
 
-    const addCourse = (courseName) => {
+    const updateComplete = () => {
+        const index = props.index
+        let complete = selected.size > 0
+        props.setComplete(index, complete)
+    }
+
+    const toggleCourse = (courseName) => {
         if (selected.has(courseName)) {
             setSelected(prev => new Set([...prev].filter(x => x !== courseName)))
         } else {
             setSelected(prev => new Set(prev.add(courseName)))
         }
 
-        const index = props.index
-        let complete = selected.size > 0
+        updateComplete()
+    }
 
-        props.setComplete(index, complete)
+    const removeCourse = (courseName) => {
+        setSelected(prev => new Set([...prev].filter(x => x !== courseName)))
+        updateComplete()
     }
 
     const getChips = () => {
@@ -45,12 +53,28 @@ function SubjectForm(props) {
 
                 chips.push(<Chip
                     text={courseName}
-                    key={courseName}
-                    onClick={addCourse}
+                    onClick={toggleCourse}
                     active={active}
+                    key={courseName}
                 />)
             }
         }
+
+        return chips
+    }
+
+    const getSelectedChips = () => {
+        const chips = []
+
+        selected.forEach((current) => {
+            chips.push(<Chip
+                text={current}
+                active={true}
+                canDelete={true}
+                onDelete={removeCourse}
+                key={current}
+            />)
+        })
 
         return chips
     }
@@ -71,6 +95,11 @@ function SubjectForm(props) {
 
             <div className='chip-container'>
                 {getChips()}
+            </div>
+
+            <h3 id='selected-courses-label'>Selected Courses</h3>
+            <div className='selected-chip-container'>
+                {getSelectedChips()}
             </div>
         </FormWrapper>
     )

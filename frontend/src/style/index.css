@@ -31,6 +31,9 @@ body {
     margin-top: 4px;
     height: 30.5px;
     transition: background-color .3s;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
 }
 
 .chip-active {
@@ -38,6 +41,15 @@ body {
 }
 
 .chip-active .chip-text {
+    color: var(--chip-active-text-color)
+}
+
+.chip .chip-delete-icon {
+    margin-right: 4px;
+    color: var(--chip-text-color)
+}
+
+.chip-active .chip-delete-icon {
     color: var(--chip-active-text-color)
 }
 
