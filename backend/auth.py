@@ -43,22 +43,23 @@ class Logout(Resource):
 
 class CreateAccount(Resource):
     def post(self):
-        username = request.form['username']
-        password = request.form['password']
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        email = request.form['email']
-        university = request.form['university']
-        need_help = request.form['need_help']
-        can_tutor = request.form['can_tutor']
+        username = request.json['username']
+        password = request.json['password']
+        first_name = request.json['first_name']
+        last_name = request.json['last_name']
+        email = request.json['email']
+        university_id = request.json['university_id']
+        need_help = request.json['need_help']
+        can_tutor = request.json['can_tutor']
         
         # verify new account
-        if username and password and first_name and last_name and email and university and need_help and can_tutor:
+        if username and password and first_name and last_name and email and university_id and need_help and can_tutor:
             # Create account
-            user_id = create_account(username, password, email, first_name, last_name, university, need_help, can_tutor)
+            user_id = create_account(username, password, email, first_name, last_name, university_id)
+            print(user_id, can_tutor, need_help)
             create_can_tutor(user_id, can_tutor)
-            create_need_help(user_id, need_help
-                             )
+            create_need_help(user_id, need_help)
+
             # Give them a session key
             new_session_key = generate_session_key()
             while session_key_exists(new_session_key):

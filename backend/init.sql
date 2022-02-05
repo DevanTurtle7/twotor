@@ -1,6 +1,6 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
-DROP TABLE IF EXISTS universities, subjects, courses, accounts, need_help, can_help;
+DROP TABLE IF EXISTS universities, subjects, courses, accounts, need_help, can_tutor CASCADE;
 
 CREATE TABLE universities (
     id SERIAL PRIMARY KEY,
@@ -40,7 +40,7 @@ CREATE TABLE need_help (
     course_id INTEGER REFERENCES courses ON DELETE CASCADE
 );
 
-CREATE TABLE can_help (
+CREATE TABLE can_tutor (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES accounts ON DELETE CASCADE,
     course_id INTEGER REFERENCES courses ON DELETE CASCADE
