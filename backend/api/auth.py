@@ -29,6 +29,12 @@ def validate(username, password):
     """
     return hash_password(username, password) == get_password_hash(username)
 
+def validate_new(username, email):
+    """
+    Check if username and email are not already used
+    """
+    return !username_email_exist(username, email)
+
 
 class Login(Resource):
     def post(self):
@@ -65,3 +71,26 @@ class Logout(Resource):
             return res
 
         return {'logout': False}
+
+class CreateAccount(Resource):
+    def post(self):
+        username = request.form['username']
+        password = request.form['password']
+        fname = request.form['fname']
+        lname = request.form['lname']
+        email = request.form['email']
+        
+        # verify new account
+        if username and password and fname and lname and email and validate_new(username, email):
+            new_session_key = generate_session_key()
+            while session_key_exists(new_session_key):
+                new_session_key = generate_session_key()
+            
+            update_session_key(username, new_session_key)
+            
+            # Send back with cookie
+            response = make_response({'valid': True})
+            response.set_cookie('session', new_session_key, max_age=900)
+            return response
+
+        return{'valid': False}
