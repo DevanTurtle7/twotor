@@ -29,3 +29,4 @@ class LeaveQueue(Resource):
             return {'left queue': True}
 
         return {'left queue': False}
+
