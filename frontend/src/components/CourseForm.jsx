@@ -2,15 +2,6 @@ import { useEffect, useState } from 'react';
 import FormWrapper from './FormWrapper';
 import Chip from './Chip';
 
-const SUBJECTS = {
-    "SWEN": ["123", "124", "101", "250", "344"],
-    "GCIS": ["123", "124", "101", "250", "344"],
-    "MATH": ["123", "124", "101", "250", "344"],
-    "ISTE": ["123", "124", "101", "250", "344"],
-    "STSO": ["123", "124", "101", "250", "344"],
-    "CSEC": ["123", "124", "101", "250", "344"],
-}
-
 function SubjectForm(props) {
     const [subject, setSubject] = useState(null)
     const [selected, setSelected] = useState(new Set())
@@ -47,9 +38,10 @@ function SubjectForm(props) {
 
     const getChips = () => {
         const chips = []
+        let subjects = props.subjects
 
         if (subject != null) {
-            let courseNumbers = SUBJECTS[subject]
+            let courseNumbers = subjects[subject]
 
             for (let i = 0; i < courseNumbers.length; i++) {
                 let current = courseNumbers[i]
@@ -86,7 +78,8 @@ function SubjectForm(props) {
 
     const getOptions = () => {
         const options = []
-        let keys = Object.keys(SUBJECTS)
+        const subjects = props.subjects
+        let keys = Object.keys(subjects)
 
         for (let i = 0; i < keys.length; i++) {
             let current = keys[i]

@@ -2,8 +2,9 @@ import '../style/SetupPage.css';
 import UniversityForm from '../components/UniversityForm';
 import CourseForm from '../components/CourseForm';
 import { useState } from 'react';
+import AccountForm from '../components/AccountForm';
 
-const MAX_INDEX = 2;
+const MAX_INDEX = 3;
 
 function SetupPage(props) {
     const [index, setIndex] = useState(0);
@@ -53,17 +54,29 @@ function SetupPage(props) {
     const helpWithUpdated = (data) => {
         setHelpWith(data)
     }
-    
+
     const canHelpUpdated = (data) => {
         setCanHelp(data)
+    }
+
+    const getSubjects = () => {
+        return {
+            "SWEN": ["123", "124", "101", "250", "344"],
+            "GCIS": ["123", "124", "101", "250", "344"],
+            "MATH": ["123", "124", "101", "250", "344"],
+            "ISTE": ["123", "124", "101", "250", "344"],
+            "STSO": ["123", "124", "101", "250", "344"],
+            "CSEC": ["123", "124", "101", "250", "344"],
+        }
     }
 
     return (
         <div className='page-col' id='setup-page'>
             <div className='form-container'>
-                <UniversityForm index={0} current={index} setComplete={setComplete} />
-                <CourseForm index={1} current={index} setComplete={setComplete} callback={helpWithUpdated} text="Select Courses You Want Help With"/>
-                <CourseForm index={2} current={index} setComplete={setComplete} callback={canHelpUpdated} text="Select Courses You Can Help Others With"/>
+                <AccountForm index={0} current={index} setComplete={setComplete} />
+                <UniversityForm index={1} current={index} setComplete={setComplete} />
+                <CourseForm index={2} current={index} subjects={getSubjects()} setComplete={setComplete} callback={helpWithUpdated} text="Select Courses You Want Help With" />
+                <CourseForm index={3} current={index} subjects={getSubjects()} setComplete={setComplete} callback={canHelpUpdated} text="Select Courses You Can Help Others With" />
             </div>
 
             <div className='form-footer'>
