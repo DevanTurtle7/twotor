@@ -3,6 +3,7 @@ import UniversityForm from '../components/UniversityForm';
 import CourseForm from '../components/CourseForm';
 import { useState } from 'react';
 import AccountForm from '../components/AccountForm';
+import axios from 'axios';
 
 const MAX_INDEX = 3;
 
@@ -38,7 +39,10 @@ function SetupPage(props) {
     }
 
     const finish = () => {
-
+        console.log(canHelp);
+        console.log(accountInfo);
+        console.log(helpWith);
+        console.log(university);
     }
 
     const currentCompleted = () => {
@@ -71,21 +75,10 @@ function SetupPage(props) {
         getSubjectsFromUniversity(data)
     }
 
-    const getSubjectsFromUniversity = (universityId) => {
-        setSubjects(
-            [
-                {
-                    id: 1,
-                    name: "Software Engineering",
-                    code: "SWEN"
-                }, 
-                {
-                    id: 2,
-                    name: "Computer Science",
-                    code: "GCIS"
-                }
-            ]
-        )
+    const getSubjectsFromUniversity = async (universityId) => {
+        await axios.get('http://localhost:5000/subjects/' + universityId).then(res => {
+            setSubjects(res.data)
+        });
     }
 
     return (

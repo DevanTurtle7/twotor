@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_restful import Resource, Api
+from flask_cors import CORS, cross_origin
 
 from auth import Login, CreateAccount, Logout
 from welcome_api import ListSubjects, ListCourses, ListUniversities, ListQueue
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADER'] = 'Content-Type'
 api = Api(app)
 
 

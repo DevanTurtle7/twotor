@@ -2,20 +2,27 @@ import { Button } from 'reactstrap';
 import SetupPage from './pages/SetupPage';
 import WelcomePage from './pages/WelcomePage'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 function App() {
-    const getUniversities = () => {
-        return {
-            1: "Rochester Institute of Technology",
-            2: "University of Rochester"
-        }
+    const [universities, setUniversities] = useState({})
+
+    const getUniversities = async () => {
+        await axios.get('http://localhost:5000/universities').then(res => {
+            setUniversities(res.data)
+        });
     }
+
+    useEffect(() => {
+        getUniversities()
+    }, [])
 
     return (
         <Router>
             <Routes>
                 <Route exact path='/' element={<WelcomePage />} />
-                <Route exact path='/createAccount' element={<SetupPage universities={getUniversities()} />} />
+                <Route exact path='/createAccount' element={<SetupPage universities={universities} />} />
             </Routes>
         </Router>
     );
