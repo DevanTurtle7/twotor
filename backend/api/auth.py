@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request, make_response
 import secrets
 from hashlib import sha512
+from backend.database.db_auth import *
 
 
 def generate_session_key():

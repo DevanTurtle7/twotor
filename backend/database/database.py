@@ -10,8 +10,6 @@ CONFIG = "backend/database/config.ini"
 config = ConfigParser()
 config.read(CONFIG)
 
-print(os.getcwd())
-
 DATABASE = config["postgres"]["database"]
 USERNAME = config["postgres"]["username"]
 PASSWORD = config["postgres"]["password"]
