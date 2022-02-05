@@ -1,13 +1,15 @@
 from database import db
 
-def join_queue(user_id, course_id):
+
+def join_queue(user_id, course_id, description):
     sql = """
     INSERT INTO help_queue
-    (user_id, course_id)
-    VALUES(%s, %s)
+    (user_id, course_id, description)
+    VALUES(%s, %s, %s)
     """
-    params = [user_id, course_id]
+    params = [user_id, course_id, description]
     return db.exec_commit(sql, params)
+
 
 def leave_queue(user_id, course_id):
     sql = """

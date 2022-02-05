@@ -80,7 +80,7 @@ def session_key_exists(session_key):
 
 def authenticate_session(session_key):
     sql = """
-    SELECT id, username
+    SELECT id
     FROM accounts
     WHERE session_key = %s AND
     key_expire > NOW();
