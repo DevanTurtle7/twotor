@@ -10,13 +10,13 @@ function SchoolForm(props) {
     const getOptions = () => {
         let options = []
         let universities = props.universities
-        let keys = Object.keys(universities)
 
-        for (let i = 0; i < keys.length; i++) {
-            let value = keys[i]
-            let name = universities[value]
+        for (let i = 0; i < universities.length; i++) {
+            let current = universities[i]
+            let id = current.id
+            let name = current.name
 
-            options.push(<option value={value} key={value}>{name}</option>)
+            options.push(<option value={id} key={id}>{name}</option>)
         }
 
         return options

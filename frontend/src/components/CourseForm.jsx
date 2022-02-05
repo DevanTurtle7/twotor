@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FormWrapper from './FormWrapper';
 import Chip from './Chip';
+import axios from 'axios';
 
 function SubjectForm(props) {
     const [subject, setSubject] = useState(null)
@@ -10,15 +11,13 @@ function SubjectForm(props) {
 
     const onChange = (e) => {
         setSubject(parseInt(e.target.value))
-        getCourses()
+        getCourses(e.target.value)
     }
 
-    const getCourses = () => {
-        setCourses([{
-            id: 1,
-            name: "Computing Security",
-            number: 123
-        }])
+    const getCourses = async (subjectID) => {
+        await axios.get('http://localhost:5000/courses/' + subjectID).then(res => {
+            setCourses(res.data)
+        });
     }
 
     useEffect(() => {
