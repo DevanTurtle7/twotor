@@ -9,7 +9,7 @@ function App() {
     const [universities, setUniversities] = useState({})
 
     const getUniversities = async () => {
-        await axios.get('http://localhost:5000/universities').then(res => {
+        await axios.get('http://ndawson.student.rit.edu/universities').then(res => {
             setUniversities(res.data)
         });
     }

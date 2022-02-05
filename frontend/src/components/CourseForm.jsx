@@ -15,7 +15,7 @@ function SubjectForm(props) {
     }
 
     const getCourses = async (subjectID) => {
-        await axios.get('http://localhost:5000/courses/' + subjectID).then(res => {
+        await axios.get('http://ndawson.student.rit.edu/courses/' + subjectID).then(res => {
             setCourses(res.data)
         });
     }

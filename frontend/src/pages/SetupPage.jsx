@@ -39,10 +39,7 @@ function SetupPage(props) {
     }
 
     const finish = () => {
-        console.log(canHelp);
-        console.log(accountInfo);
-        console.log(helpWith);
-        console.log(university);
+
     }
 
     const currentCompleted = () => {
@@ -76,7 +73,7 @@ function SetupPage(props) {
     }
 
     const getSubjectsFromUniversity = async (universityId) => {
-        await axios.get('http://localhost:5000/subjects/' + universityId).then(res => {
+        await axios.get('http://ndawson.student.rit.edu/subjects/' + universityId).then(res => {
             setSubjects(res.data)
         });
     }
