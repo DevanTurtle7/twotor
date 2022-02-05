@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Resource, Api
 
 from auth import Login, CreateAccount, Logout
+from welcome_api import ListSubjects, ListCourses, ListUniversities
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,6 +19,11 @@ api.add_resource(Test, '/')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
 api.add_resource(CreateAccount, '/signup')
+
+# Welcome
+api.add_resource(ListSubjects, '/subjects/<int:university_id>')
+api.add_resource(ListCourses, '/courses/<int:subject_id>')
+api.add_resource(ListUniversities, '/universities')
 
 if __name__ == '__main__':
     app.run(debug=True)

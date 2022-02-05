@@ -75,7 +75,7 @@ class Database:
         args = parse_args(args)
         cur = self.conn.cursor(cursor_factory=RealDictCursor)
         cur.execute(sql, args)
-        return json.dumps(cur.fetchall())
+        return cur.fetchall()
 
     def exec_commit(self, sql, args=None):
         args = parse_args(args)

@@ -101,13 +101,14 @@ def create_account(username, password, email, first_name, last_name, university)
     sql = """
     INSERT INTO accounts
     (username, password, email, university_ID, first_name, last_name, salt)
-    VALUES (%s, %s, %s, %d, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
     RETURNING id;
     """
 
     salt = generate_salt()
     params = [username, hash_password_with_salt(salt, password), email, university, first_name, last_name, salt]
     return db.exec_commit_r(sql, params)[0][0]
+
 
 def create_need_help(user_id, courses):
     sql = """
