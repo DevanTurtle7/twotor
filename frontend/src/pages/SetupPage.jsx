@@ -67,7 +67,6 @@ function SetupPage(props) {
     }
 
     const universityUpdated = (data) => {
-        console.log('univ updated')
         setUniversity(data)
         getSubjectsFromUniversity(data)
     }
