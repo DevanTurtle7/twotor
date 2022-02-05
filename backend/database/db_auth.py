@@ -1,6 +1,5 @@
 from database import db
 
-
 def get_salt(username):
     sql = """SELECT salt FROM accounts WHERE username = %s;"""
     return db.exec_get_one(sql, username)[0]
@@ -47,3 +46,11 @@ def logout(session_key):
     WHERE session_key = %s;
     """
     return db.exec_commit(sql, session_key)
+
+
+def username_email_exists(username, email):
+    sql = """SELECT COUNT (*) FROM accounts WHERE username = %s;"""
+    repeated_username = db.exec_get_one(sql, username)[0]
+    sql = """SELECT COUNT (*) FROM accounts WHERE email = %s;"""
+    repeated_email = db.exec_get_one(sql, email)[0]
+    return repeated_email != 0 | repeated_username != 0
