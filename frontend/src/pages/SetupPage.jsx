@@ -1,10 +1,9 @@
 import '../style/SetupPage.css';
-import SchoolForm from '../components/SchoolForm';
-import SubjectForm from '../components/SubjectForm';
-import { Button } from 'reactstrap';
+import UniversityForm from '../components/UniversityForm';
+import CourseForm from '../components/CourseForm';
 import { useState } from 'react';
 
-const MAX_INDEX = 1;
+const MAX_INDEX = 2;
 
 function SetupPage(props) {
     const [index, setIndex] = useState(0);
@@ -52,8 +51,9 @@ function SetupPage(props) {
     return (
         <div className='page-col' id='setup-page'>
             <div className='form-container'>
-                <SchoolForm index={0} current={index} setComplete={setComplete} />
-                <SubjectForm index={1} current={index} setComplete={setComplete} />
+                <UniversityForm index={0} current={index} setComplete={setComplete} />
+                <CourseForm index={1} current={index} setComplete={setComplete} text="Select Courses You Want Help With"/>
+                <CourseForm index={2} current={index} setComplete={setComplete} text="Select Courses You Can Help Others With"/>
             </div>
 
             <div className='form-footer'>

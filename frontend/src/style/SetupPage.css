@@ -9,7 +9,7 @@
     grid-column: 1;
     grid-row: 1;
     position: relative;
-    transition: left 1s;
+    transition: left .5s;
     height: fit-content;
 }
 

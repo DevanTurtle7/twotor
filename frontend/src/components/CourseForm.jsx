@@ -86,7 +86,7 @@ function SubjectForm(props) {
     return (
         <FormWrapper index={props.index} current={props.current}>
         <div className='subject-form'>
-            <h2>Select Courses You Want Help With</h2>
+            <h2>{props.text}</h2>
 
             <select onChange={onChange} defaultValue={"DEFAULT"}>
                 <option value="DEFAULT" disabled>Select subject...</option>
