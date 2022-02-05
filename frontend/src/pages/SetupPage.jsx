@@ -46,7 +46,7 @@ function SetupPage(props) {
     }
 
     const finish = () => {
-
+        navigate('/home')
     }
 
     const currentCompleted = () => {

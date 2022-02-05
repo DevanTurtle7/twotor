@@ -9,6 +9,7 @@
     --primary-bg-color: rgb(179, 229, 252);
     --primary-text-color-disabled: rgba(2, 136, 209, .5);
     --primary-bg-color-disabled: rgba(179, 229, 252, .5);
+    overflow-x: hidden;
 }
 
 body {
@@ -111,4 +112,25 @@ button {
 select {
     margin-bottom: 10px !important;
     margin-top: 5px !important;
+}
+
+.tutor-card {
+    border-radius: 4px;
+    width: 400px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 8px;
+    margin-top: 4px;
+    display: flex;
+    flex-flow: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 800px) {
+    .page-col {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
 }

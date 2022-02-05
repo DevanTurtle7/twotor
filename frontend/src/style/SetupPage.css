@@ -34,10 +34,16 @@
 }
 
 #setup-page {
-    height: 100vh;
+    height: calc(100vh - 60px);
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+}
+
+@media (hover: hover) {
+    #setup-page {
+        height: 100vh;
+    }
 }
 
 .chip-container, .selected-chip-container {

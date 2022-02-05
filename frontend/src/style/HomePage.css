@@ -1,0 +1,9 @@
+#home-page {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.cards-row {
+    display: flex;
+    flex-flow: row;
+}
