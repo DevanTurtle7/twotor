@@ -1,4 +1,5 @@
-from database import db
+from backend.database.database import db
+
 
 def get_salt(username):
     sql = """SELECT salt FROM accounts WHERE username = %s;"""
