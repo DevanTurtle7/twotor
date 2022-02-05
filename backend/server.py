@@ -37,7 +37,7 @@ api.add_resource(ListUniversities, '/universities')
 
 # =============
 # Queue
-api.add_resource(ListQueue, '/queue')
+api.add_resource(ListQueue, '/queue')  # good
 api.add_resource(JoinQueue, '/joinQueue')
 api.add_resource(LeaveQueue, '/leaveQueue')
 

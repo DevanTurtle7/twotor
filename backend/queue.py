@@ -31,11 +31,18 @@ class ListQueue(Resource):
 
 class JoinQueue(Resource):
     def post(self):
-        user_id = request.form['user_id']
-        course_id = request.form['course_id']
+        session_key = request.cookies.get('session')
+        user_id = authenticate_session(session_key)
 
-        if user_id and course_id:
-            join_queue(user_id, course_id)
+        if user_id is None:
+            return 'Not authenticated.'
+
+        user_id = user_id[0]
+        course_id = request.json['course_id']
+        description = request.json['description']
+
+        if course_id:
+            join_queue(user_id, course_id, description)
 
             response = make_response({'join queue': True})
             return response
@@ -45,10 +52,16 @@ class JoinQueue(Resource):
 
 class LeaveQueue(Resource):
     def post(self):
-        user_id = request.form['user_id']
-        course_id = request.form['course_id']
+        session_key = request.cookies.get('session')
+        user_id = authenticate_session(session_key)
 
-        if user_id and course_id:
+        if user_id is None:
+            return 'Not authenticated.'
+
+        user_id = user_id[0]
+        course_id = request.json['course_id']
+
+        if course_id:
             leave_queue(user_id, course_id)
 
             return {'left queue': True}
