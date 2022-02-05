@@ -31,15 +31,13 @@ api.add_resource(ListCourses, '/courses/<int:subject_id>')
 api.add_resource(ListUniversities, '/universities')
 
 # Queue
-api.add_resource(ListQueue, '/queue/<int:course_id>')
+api.add_resource(ListQueue, '/queue')
 
 # Update
 api.add_resource(AddHelpCourse, '/addhelp')
 api.add_resource(AddTutorCourse, '/addtutor')
 api.add_resource(DelHelpCourse, '/delhelp')
 api.add_resource(DelTutorCourse, '/deltutor ')
-
-
 
 
 if __name__ == '__main__':
