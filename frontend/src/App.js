@@ -1,10 +1,10 @@
 import { Button } from 'reactstrap';
-import CreationForm from './CreationForm';
+import SetupPage from './pages/SetupPage';
 
 function App() {
     return (
         <div>
-            <CreationForm />
+            <SetupPage />
         </div>
     );
 }

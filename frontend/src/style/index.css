@@ -37,3 +37,15 @@ body {
     font-size: 15px !important;
     color: var(--chip-text-color);
 }
+
+.page-col {
+    max-width: 1000px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.centered-col {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
