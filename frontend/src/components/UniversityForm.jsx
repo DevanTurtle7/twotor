@@ -1,9 +1,10 @@
 import FormWrapper from "./FormWrapper";
 
 function SchoolForm(props) {
-    const onChange = () => {
+    const onChange = (e) => {
         const index = props.index
         props.setComplete(index, true);
+        props.callback(e.target.value)
     }
     
     const getOptions = () => {

@@ -6,9 +6,19 @@ function SubjectForm(props) {
     const [subject, setSubject] = useState(null)
     const [selected, setSelected] = useState(new Set())
     const [needUpdate, setNeedUpdate] = useState(false)
+    const [courses, setCourses] = useState([])
 
     const onChange = (e) => {
-        setSubject(e.target.value)
+        setSubject(parseInt(e.target.value))
+        getCourses()
+    }
+
+    const getCourses = () => {
+        setCourses([{
+            id: 1,
+            name: "Computing Security",
+            number: 123
+        }])
     }
 
     useEffect(() => {
@@ -38,14 +48,22 @@ function SubjectForm(props) {
 
     const getChips = () => {
         const chips = []
-        let subjects = props.subjects
 
-        if (subject != null) {
-            let courseNumbers = subjects[subject]
+        let subjectCode;
 
-            for (let i = 0; i < courseNumbers.length; i++) {
-                let current = courseNumbers[i]
-                let courseName = subject + "-" + current
+        for (let i = 0; i < props.subjects.length; i++) {
+            let current = props.subjects[i]
+
+            if (current.id === subject) {
+                subjectCode = current.code
+            }
+        }
+
+        if (subject != null && subjectCode != undefined) {
+            for (let i = 0; i < courses.length; i++) {
+                let current = courses[i]
+                let number = current.number
+                let courseName = subjectCode + "-" + number
                 let active = selected.has(courseName)
 
                 chips.push(<Chip
@@ -79,11 +97,13 @@ function SubjectForm(props) {
     const getOptions = () => {
         const options = []
         const subjects = props.subjects
-        let keys = Object.keys(subjects)
 
-        for (let i = 0; i < keys.length; i++) {
-            let current = keys[i]
-            options.push(<option value={current} key={current}>{current}</option>)
+        for (let i = 0; i < subjects.length; i++) {
+            let current = subjects[i]
+            let value = current.id
+            let code = current.code
+
+            options.push(<option value={value} key={code}>{code}</option>)
         }
 
         return options
@@ -91,23 +111,23 @@ function SubjectForm(props) {
 
     return (
         <FormWrapper index={props.index} current={props.current}>
-        <div className='subject-form'>
-            <h2>{props.text}</h2>
+            <div className='subject-form'>
+                <h2>{props.text}</h2>
 
-            <select onChange={onChange} defaultValue={"DEFAULT"}>
-                <option value="DEFAULT" disabled>Select subject...</option>
-                {getOptions()}
-            </select>
+                <select onChange={onChange} defaultValue={"DEFAULT"}>
+                    <option value="DEFAULT" disabled>Select subject...</option>
+                    {getOptions()}
+                </select>
 
-            <div className='chip-container'>
-                {getChips()}
+                <div className='chip-container'>
+                    {getChips()}
+                </div>
+
+                <h3 id='selected-courses-label'>Selected Courses</h3>
+                <div className='selected-chip-container'>
+                    {getSelectedChips()}
+                </div>
             </div>
-
-            <h3 id='selected-courses-label'>Selected Courses</h3>
-            <div className='selected-chip-container'>
-                {getSelectedChips()}
-            </div>
-        </div>
         </FormWrapper>
     )
 }
