@@ -97,13 +97,13 @@ def logout(session_key):
     return db.exec_commit(sql, session_key)
 
 
-def create_account(username, password, email, first_name, last_name):
+def create_account(username, password, email, first_name, last_name, university, need_help, can_tutor):
     sql = """
     INSERT INTO accounts
-    (username, password, email, first_name, last_name, salt)
-    VALUES (%s, %s, %s, %s, %s, %s)
+    (username, password, email, university, first_name, last_name, salt)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
     RETURNING id;
     """
     salt = generate_salt()
-    params = [username, hash_password_with_salt(salt, password), email, first_name, last_name, salt]
+    params = [username, hash_password_with_salt(salt, password), email, university, first_name, last_name, salt]
     return db.exec_commit_r(sql, params)[0][0]

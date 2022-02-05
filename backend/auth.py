@@ -48,11 +48,14 @@ class CreateAccount(Resource):
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         email = request.form['email']
+        university = request.form['university']
+        need_help = request.form['need_help']
+        can_tutor = request.form['can_tutor']
         
         # verify new account
-        if username and password and first_name and last_name and email:
+        if username and password and first_name and last_name and email and university and need_help and can_tutor:
             # Create account
-            print(create_account(username, password, email, first_name, last_name))
+            print(create_account(username, password, email, first_name, last_name, university, need_help, can_tutor))
 
             # Give them a session key
             new_session_key = generate_session_key()
