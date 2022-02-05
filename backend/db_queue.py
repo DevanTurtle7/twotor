@@ -12,7 +12,7 @@ def join_queue(user_id, course_id):
 def leave_queue(user_id, course_id):
     sql = """
     DELETE FROM help_queue
-    WHERE user_id = %s AND course = %s
+    WHERE user_id = %s AND course_id = %s
     """
     params = [user_id, course_id]
     return db.exec_commit(sql, params)
