@@ -14,6 +14,19 @@ def generate_session_key():
     return secrets.token_urlsafe(24)
 
 
+def generate_salt():
+    """
+    Internal method to generate a salt for a new user in the database
+    128 chars for increased security
+    """
+    return secrets.token_hex(64)
+
+
+def hash_password_with_salt(salt, password):
+    combined_str = salt + password
+    return sha512(combined_str.encode("utf-8")).hexdigest()
+
+
 def hash_password(username, password):
     """Generate the sha512 hash of the salt + password
 
@@ -30,13 +43,6 @@ def validate(username, password):
     Check if username and password combo is valid
     """
     return hash_password(username, password) == get_password_hash(username)
-
-
- def validate_new(username, email):
-     """
-     Check if username and email are not already used
-     """
-     return username_email_exist(username, email) = False
 
 
 class Login(Resource):
@@ -75,16 +81,21 @@ class Logout(Resource):
 
         return {'logout': False}
 
+
 class CreateAccount(Resource):
     def post(self):
         username = request.form['username']
         password = request.form['password']
-        fname = request.form['fname']
-        lname = request.form['lname']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
         email = request.form['email']
         
         # verify new account
-        if username and password and fname and lname and email and validate_new(username, email):
+        if username and password and first_name and last_name and email:
+            # Create account
+            print(create_account(username, password, email, first_name, last_name))
+
+            # Give them a session key
             new_session_key = generate_session_key()
             while session_key_exists(new_session_key):
                 new_session_key = generate_session_key()

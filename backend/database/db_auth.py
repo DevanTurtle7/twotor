@@ -1,4 +1,5 @@
 from backend.database.database import db
+from backend.api.auth import generate_salt, hash_password_with_salt
 
 
 def get_salt(username):
@@ -49,9 +50,13 @@ def logout(session_key):
     return db.exec_commit(sql, session_key)
 
 
-def username_email_exists(username, email):
-    sql = """SELECT COUNT (*) FROM accounts WHERE username = %s;"""
-    repeated_username = db.exec_get_one(sql, username)[0]
-    sql = """SELECT COUNT (*) FROM accounts WHERE email = %s;"""
-    repeated_email = db.exec_get_one(sql, email)[0]
-    return repeated_email != 0 | repeated_username != 0
+def create_account(username, password, email, first_name, last_name):
+    sql = """
+    INSERT INTO accounts
+    (username, password, email, first_name, last_name, salt)
+    VALUES (%s, %s, %s, %s, %s, %s)
+    RETURNING id;
+    """
+    salt = generate_salt()
+    params = [username, hash_password_with_salt(salt, password), email, first_name, last_name, salt]
+    return db.exec_commit_r(sql, params)[0][0]
