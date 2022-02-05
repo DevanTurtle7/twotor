@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormWrapper from './FormWrapper';
 import Chip from './Chip';
 
@@ -25,6 +25,11 @@ function SubjectForm(props) {
         } else {
             setSelected(prev => new Set(prev.add(courseName)))
         }
+
+        const index = props.index
+        let complete = selected.size > 0
+
+        props.setComplete(index, complete)
     }
 
     const getChips = () => {

@@ -13,7 +13,7 @@ function SetupPage(props) {
         1: false
     })
 
-    const canGoNext = () => index < MAX_INDEX && currentCompleted()
+    const canGoNext = () => currentCompleted()
     const canGoPrev = () => index > 0
 
     const next = () => {
@@ -39,6 +39,8 @@ function SetupPage(props) {
         }))
     }
 
+    const getButtonText = () => index === MAX_INDEX ? "Finish" : "Next"
+
     return (
         <div className='page-col' id='setup-page'>
             <div className='form-container'>
@@ -48,7 +50,7 @@ function SetupPage(props) {
 
             <div className='form-footer'>
                 <Button onClick={prev} disabled={!canGoPrev()}>Back</Button>
-                <Button onClick={next} color='primary' disabled={!canGoNext()}>Next</Button>
+                <Button onClick={next} color='primary' disabled={!canGoNext()}>{getButtonText()}</Button>
             </div>
         </div>
     )
