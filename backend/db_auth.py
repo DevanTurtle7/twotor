@@ -1,6 +1,6 @@
 import secrets
 from hashlib import sha512
-
+from psycopg2.extras import execute_values
 from database import db
 
 
@@ -97,13 +97,35 @@ def logout(session_key):
     return db.exec_commit(sql, session_key)
 
 
-def create_account(username, password, email, first_name, last_name, university, need_help, can_tutor):
+def create_account(username, password, email, first_name, last_name, university):
     sql = """
     INSERT INTO accounts
-    (username, password, email, university, first_name, last_name, salt)
-    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    (username, password, email, university_ID, first_name, last_name, salt)
+    VALUES (%s, %s, %s, %d, %s, %s, %s)
     RETURNING id;
     """
+
     salt = generate_salt()
     params = [username, hash_password_with_salt(salt, password), email, university, first_name, last_name, salt]
     return db.exec_commit_r(sql, params)[0][0]
+
+def create_need_help(user_id, courses):
+    sql = """
+    INSERT INTO need_help
+    (user_id, course_id)
+    VALUES %s
+    """
+    params = [(user_id, x) for x in courses]
+    cur = db.conn.cursor()
+    return execute_values(cur, sql, params)
+
+
+def create_can_tutor(user_id, courses):
+    sql = """
+    INSERT INTO can_tutor
+    (user_id, course_id)
+    VALUES %s
+    """
+    params = [(user_id, x) for x in courses]
+    cur = db.conn.cursor()
+    return execute_values(cur, sql, params)
