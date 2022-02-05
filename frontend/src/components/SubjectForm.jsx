@@ -13,9 +13,18 @@ const SUBJECTS = {
 
 function SubjectForm(props) {
     const [subject, setSubject] = useState(null)
+    const [selected, setSelected] = useState(new Set())
 
     const onChange = (e) => {
         setSubject(e.target.value)
+    }
+
+    const addCourse = (courseName) => {
+        if (selected.has(courseName)) {
+            setSelected(prev => new Set([...prev].filter(x => x !== courseName)))
+        } else {
+            setSelected(prev => new Set(prev.add(courseName)))
+        }
     }
 
     const getChips = () => {
@@ -27,8 +36,14 @@ function SubjectForm(props) {
             for (let i = 0; i < courseNumbers.length; i++) {
                 let current = courseNumbers[i]
                 let courseName = subject + "-" + current
+                let active = selected.has(courseName)
 
-                chips.push(<Chip text={courseName} key={courseName}/>)
+                chips.push(<Chip
+                    text={courseName}
+                    key={courseName}
+                    onClick={addCourse}
+                    active={active}
+                />)
             }
         }
 

@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 #root {
-    --chip-text-color: #0288D1;
-    --chip-border-color: #4FC3F7;
-    --chip-bg-color: #B3E5FC;
+    --chip-text-color: rgb(100, 100, 100);
+    --chip-bg-color: rgb(235, 235, 235);
+    --chip-active-text-color: #0288D1;
+    --chip-active-bg-color: #B3E5FC;
 }
 
 body {
@@ -20,22 +21,31 @@ body {
 
 .chip {
     background-color: var(--chip-bg-color);
-    border: 2px solid var(--chip-border-color);
     border-radius: 100px;
     width: fit-content;
     padding-right: 10px;
     padding-left: 10px;
-    padding-top: 2px;
+    padding-top: 4px;
     padding-bottom: 4px;
     margin-right: 4px;
     margin-top: 4px;
     height: 30.5px;
+    transition: background-color .3s;
+}
+
+.chip-active {
+    background-color: var(--chip-active-bg-color);
+}
+
+.chip-active .chip-text {
+    color: var(--chip-active-text-color)
 }
 
 .chip-text {
     margin: 0;
     font-size: 15px !important;
     color: var(--chip-text-color);
+    transition: color .3s;
 }
 
 .page-col {
