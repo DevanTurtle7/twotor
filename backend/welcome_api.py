@@ -1,13 +1,15 @@
 from flask_restful import Resource
 from flask import jsonify
-
 from database import db
 
 
 class ListUniversities(Resource):
     def get(self):
-        # Ethan do this
-        pass
+        sql = """
+        SELECT id, name
+        FROM universities
+        """
+        return jsonify(db.exec_get_all_json(sql))
 
 
 class ListSubjects(Resource):
@@ -28,4 +30,3 @@ class ListCourses(Resource):
         WHERE subject_id = %s
         """
         return jsonify(db.exec_get_all_json(sql, subject_id))
-
