@@ -4,6 +4,7 @@ import CourseForm from '../components/CourseForm';
 import { useState } from 'react';
 import AccountForm from '../components/AccountForm';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const MAX_INDEX = 3;
 
@@ -18,9 +19,9 @@ function SetupPage(props) {
         0: false,
         1: false
     })
+    const navigate = useNavigate();
 
     const canGoNext = () => currentCompleted()
-    const canGoPrev = () => index > 0
 
     const next = () => {
         if (canGoNext()) {
@@ -33,9 +34,15 @@ function SetupPage(props) {
     }
 
     const prev = () => {
-        if (canGoPrev()) {
+        if (index === 0) {
+            cancel()
+        } else {
             setIndex(index - 1)
         }
+    }
+
+    const cancel = () => {
+        navigate('/')
     }
 
     const finish = () => {
@@ -53,7 +60,8 @@ function SetupPage(props) {
         }))
     }
 
-    const getButtonText = () => index === MAX_INDEX ? "Finish" : "Next"
+    const getNextButtonText = () => index === MAX_INDEX ? "Finish" : "Next"
+    const getBackButtonText = () => index === 0 ? "Cancel" : "Back"
 
     const helpWithUpdated = (data) => {
         setHelpWith(data)
@@ -102,8 +110,8 @@ function SetupPage(props) {
             </div>
 
             <div className='form-footer'>
-                <button onClick={prev} disabled={!canGoPrev()} className="button-secondary">Back</button>
-                <button onClick={next} disabled={!canGoNext()} className="button-primary">{getButtonText()}</button>
+                <button onClick={prev} className="button-secondary">{getBackButtonText()}</button>
+                <button onClick={next} disabled={!canGoNext()} className="button-primary">{getNextButtonText()}</button>
             </div>
         </div>
     )
