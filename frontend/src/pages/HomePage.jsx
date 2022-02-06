@@ -53,7 +53,7 @@ function HomePage(props) {
             let lastName = current.last_name
             let name = firstName + " " + lastName
             let description = current.description
-            let courseName = current.courseName
+            let courseName = current.code
             let course = current.course
             let userId = current.user_id
 

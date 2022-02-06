@@ -29,3 +29,11 @@
     flex-flow: row;
     justify-content: flex-end;
 }
+
+.tutor-card h2 {
+    margin: 0;
+}
+
+.tutor-card .chip {
+    margin-bottom: 10px;
+}
