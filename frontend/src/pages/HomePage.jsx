@@ -2,7 +2,7 @@ import '../style/HomePage.css'
 import Card from '../components/Card'
 import Chip from '../components/Chip';
 import { Fragment, useEffect, useState } from 'react';
-import { Modal, ModalBody, ModalHeader, ModalFooter, Input } from 'reactstrap'
+import { Modal, ModalBody, ModalHeader, ModalFooter, Input, Alert } from 'reactstrap'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -67,8 +67,12 @@ function HomePage(props) {
                 key={name + i}
             />)
         }
-
+        
+        if (cards.length == 0) {
+            return <Alert color="secondary" className="w-100">No users need help right now.</Alert>
+        }
         return cards
+       
     }
 
     useEffect(() => {
