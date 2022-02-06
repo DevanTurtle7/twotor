@@ -38,14 +38,20 @@ function LoginPage(props) {
         navigate("/")
     }
 
+    const onKeyPress = (e) => {
+        if (e.charCode === 13) {
+            login()
+        }
+    }
+
     return (
         <div className="page-col" id="login-page">
             <div id="login-container">
                 <FormGroup>
                     <h4>Username</h4>
-                    <Input type="text" onChange={usernameChanged} invalid={invalidLogin}/>
+                    <Input type="text" onChange={usernameChanged} invalid={invalidLogin} onKeyPress={onKeyPress} />
                     <h4>Password</h4>
-                    <Input type="password" onChange={passwordChanged} invalid={invalidLogin} />
+                    <Input type="password" onChange={passwordChanged} invalid={invalidLogin} onKeyPress={onKeyPress} />
                     <FormFeedback>
                         Invalid username or password
                     </FormFeedback>
