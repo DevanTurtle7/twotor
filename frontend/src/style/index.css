@@ -9,6 +9,8 @@
     --primary-bg-color: rgb(179, 229, 252);
     --primary-text-color-disabled: rgba(2, 136, 209, .5);
     --primary-bg-color-disabled: rgba(179, 229, 252, .5);
+    --primary-bg-color-hover: #81D4FA;
+    --secondary-bg-color-hover: rgb(210, 210, 210);
     overflow-x: hidden;
 }
 
@@ -90,11 +92,13 @@ button {
 }
 
 .button-primary {
+    transition: background-color .3s;
     background-color: var(--primary-bg-color);
     color: var(--primary-text-color)
 }
 
 .button-secondary {
+    transition: background-color .3s;
     background-color: var(--secondary-bg-color);
     color: var(--secondary-text-color)
 }
@@ -132,5 +136,23 @@ select {
     .page-col {
         margin-left: 40px;
         margin-right: 40px;
+    }
+}
+
+@media (hover: hover) {
+    .chip-active.clickable:hover {
+        background-color: var(--primary-bg-color-hover);
+    }
+
+    .chip:not(.chip-active):hover {
+        background-color: var(--secondary-bg-color-hover);
+    }
+
+    .button-primary:hover:enabled {
+        background-color: var(--primary-bg-color-hover);
+    }
+
+    .button-secondary:hover:enabled {
+        background-color: var(--secondary-bg-color-hover);
     }
 }
