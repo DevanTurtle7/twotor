@@ -118,18 +118,6 @@ function HomePage(props) {
 
         return chips
     }
-<<<<<<< HEAD
-    const onClick = async () => {
-        fetch('http://ndawson.student.rit.edu/joinQueue'), {
-        method: "POST",
-        headers: {
-                'Authorization': getCookie('cookie'),
-                'Content-Type': 'application/json' ,
-            }, body: JSON.stringify({
-                'course_id':
-            })
-=======
->>>>>>> 006f5e5e125d7ad45e486a6b3e0f1bcb45d68122
 
     const toggleModal = () => {
         setModalOpen(!modalOpen)
@@ -141,9 +129,9 @@ function HomePage(props) {
 
     const onClick = () => {
         joinQueue(currentCourseId, problem)
-        navigate("/chat")
+        navigate('/chat')
     }
-    
+
     return (
         <Fragment>
             <div id="home-page">
