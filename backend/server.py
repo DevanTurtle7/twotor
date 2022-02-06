@@ -10,7 +10,6 @@ from message import *
 
 app = Flask(__name__)
 cors = CORS(app)
-app.config['CORS_HEADER'] = 'Content-Type'
 api = Api(app)
 
 
