@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from flask import request, make_response, jsonify
+from flask import request, jsonify
 from datetime import datetime
 
 from db_auth import *
@@ -36,3 +36,29 @@ class ListChats(Resource):
         """
         params = [user_id, chatting_with, chatting_with, user_id]
         return jsonify(db.exec_get_all_json(sql, params))
+
+class JoinChat(Resource):
+    def post(self):
+        session_key = request.cookies.get('session')
+        user_id = authenticate_session(session_key)
+        chatting_with = request.form['chatter']
+        if user_id is None:
+            return 'Not authenticated.'
+
+        user_id = user_id[0]
+        join_chat(user_id, chatting_with)
+
+        return {'Joined chat': True}
+
+class LeaveChat(Resource):
+    def post(self):
+        session_key = request.cookies.get('session')
+        user_id = authenticate_session(session_key)
+        chatting_with = get_chatter(session_key)
+        if user_id is None:
+            return 'Not authenticated.'
+
+        user_id = user_id[0]
+        leave_chat(user_id, chatting_with)
+
+        return {'Joined chat': True}
