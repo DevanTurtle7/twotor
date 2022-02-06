@@ -37,6 +37,9 @@ def leave_chat(user_id):
     UPDATE accounts 
     SET chatting_with = NULL
     WHERE id = %s;
+    DELETE FROM
+    help_queue
+    WHERE user_id = %s;
     """
     return db.exec_commit(sql, user_id)
 
