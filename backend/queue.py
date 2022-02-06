@@ -43,13 +43,25 @@ class JoinQueue(Resource):
 
         if course_id:
             result = join_queue(user_id, course_id, description)
-            if result is None:
+            if result == "error":
                 return {'error': 'You are already in queue for this course.'}
 
             response = make_response({'success': True})
             return response
 
         return {'error': 'Error.'}
+
+
+class ListNeedHelp(Resource):
+    def get(self):
+        session_key = request.headers['authorization']
+        user_id = authenticate_session(session_key)
+
+        if user_id is None:
+            return 'Not authenticated.'
+
+        user_id = user_id[0]
+        return list_need_help(user_id)
 
 
 class LeaveQueue(Resource):

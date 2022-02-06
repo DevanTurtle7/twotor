@@ -1,12 +1,21 @@
 from flask_restful import Resource
 from flask import request, make_response, jsonify
 
+from db_queue import leave_all_queue
 from db_auth import *
 
 
+class GetChattingWith(Resource):
+    def get(self):
+        res = get_chatter_name(request.headers['authorization'])
+        if len(res) == 0:
+            return None
+        else:
+            return jsonify(res[0])
+
 class Account(Resource):
     def get(self):
-        return get_first_name(request.cookies.get('session'))
+        return get_first_name(request.headers['authorization'])
 
 
 class GetId(Resource):
@@ -18,7 +27,7 @@ class GetId(Resource):
 
 class Login(Resource):
     def get(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
 
         if user_id is None:
@@ -48,10 +57,11 @@ class Login(Resource):
 
 class Logout(Resource):
     def get(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         if session_key and session_key_exists(session_key):
+            user_id = authenticate_session(session_key)
+            leave_all_queue(user_id)
             logout(session_key)
-
             # Send back response with deleted cookie
             return jsonify({'logout': True})
 
