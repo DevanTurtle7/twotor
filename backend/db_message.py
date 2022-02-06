@@ -41,7 +41,7 @@ def leave_chat(user_id, chatting_with):
     SET chatting_with = NULL
     WHERE id = %s;
     """
-    params = [chatting_with, user_id, user_id, chatting_with]
+    params = [user_id, chatting_with]
     return db.exec_commit(sql, params)
 
 

@@ -10,6 +10,7 @@ function ChatPage(props) {
     const [messages, setMessages] = useState([])
     const [uid, setUID] = useState(-1)
     const [gettingChats, setGettingChats] = useState(false)
+    const [name, setName] = useState("")
 
     const getCookie = (cname) => {
         // Code from w3 schools :)
@@ -72,6 +73,7 @@ function ChatPage(props) {
                 'message-input': text
             })
         }).then(response => response.json()).then(response => {
+            setText("")
         })
     }
 
@@ -117,6 +119,27 @@ function ChatPage(props) {
         })
     }
 
+    const getName = () => {
+        return new Promise((resolve) => {
+            fetch('http://ndawson.student.rit.edu/getChattingWith', {
+                method: "GET",
+                headers: {
+                    'Authorization': getCookie('cookie'),
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => response.json()).then(response => {
+                console.log(response)
+                setName(response.first_name + " " + response.last_name)
+            })
+        })
+    }
+
+    const onKeyPress = (e) => {
+        if (e.charCode === 13) {
+            sendMessage()
+        }
+    }
+
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -127,6 +150,7 @@ function ChatPage(props) {
             console.log(uid)
             setUID(uid)
         } else if (!gettingChats) {
+            getName()
             setGettingChats(true)
             getChats()
         }
@@ -138,7 +162,8 @@ function ChatPage(props) {
         <div id="chat-page">
             <div id="navbar">
                 <h3 className='message-label'>
-                    <MdArrowBack className='back-arrow clickable' onClick={goBack} /> Nick Dawson
+                    <MdArrowBack className='back-arrow clickable' onClick={goBack} />
+                    {name}
                 </h3>
             </div>
             <div id="chat-history">
@@ -146,7 +171,7 @@ function ChatPage(props) {
             </div>
             <div id="message-bar">
                 <div id="input-container">
-                    <Input placeholder='Send Message' type='text' id='message-input' onChange={textChanged} />
+                    <Input placeholder='Send Message' type='text' value={text} id='message-input' onKeyPress={onKeyPress} onChange={textChanged} />
                 </div>
                 <div id="button-container">
                     <button className='circle-button' onClick={sendMessage}>

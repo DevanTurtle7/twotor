@@ -1,12 +1,17 @@
 import '../style/HomePage.css'
 import Card from '../components/Card'
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import Chip from '../components/Chip';
+import { Fragment, useEffect, useState } from 'react';
+import { Modal, ModalBody, ModalHeader, ModalFooter, Input } from 'reactstrap'
 
 function HomePage(props) {
     const [firstName, setFirstName] = useState('User');
     const [queue, setQueue] = useState([]);
     const [needHelp, setNeedHelp] = useState([])
+    const [modalOpen, setModalOpen] = useState(false)
+    const [currentCourse, setCurrentCourse] = useState("")
+    const [currentCourseId, setCurrentCourseId] = useState(-1)
+    const [problem, setProblem] = useState("")
 
     const getCookie = (cname) => {
         // Code from w3 schools :)
@@ -72,26 +77,46 @@ function HomePage(props) {
         })
     }, [])
 
-    const createJoinButtons = () => {
-        const buttons = []
+    const joinQueue = async (id, description) => {
+        fetch('http://ndawson.student.rit.edu/joinQueue', {
+            method: "POST",
+            headers: {
+                'Authorization': getCookie('cookie'),
+                'Content-Type': 'application/json',
+            }, body: JSON.stringify({
+                'course_id': id,
+                description: description
+            })
+        }).then(response => response.json()).then(response => {
+            console.log(response)
+        })
+    }
+
+    const openModal = (id, courseName) => {
+        setCurrentCourse(courseName)
+        setCurrentCourseId(id)
+        setModalOpen(true)
+    }
+
+    const createHelpChips = () => {
+        const chips = []
 
         for (let i = 0; i < needHelp.length; i++) {
             let current = needHelp[i]
-            let firstName = current.first_name
-            let lastName = current.last_name
-            let name = firstName + " " + lastName
-            let description = current.description
-            let courseName = current.courseName
-            let course = current.course
-            let userId = current.user_id
+            let courseName = current.code
+            let id = current.id
 
-            buttons.push(
-            <button className = 'primary-button' onClick={onClick}>Join Queue for {current.courseName}</button>
-            )
+            chips.push(<Chip
+                text={courseName}
+                onClick={() => { openModal(id, courseName) }}
+                active={true}
+                key={courseName}
+            />)
         }
 
-        return buttons
+        return chips
     }
+<<<<<<< HEAD
     const onClick = async () => {
         fetch('http://ndawson.student.rit.edu/joinQueue'), {
         method: "POST",
@@ -101,23 +126,55 @@ function HomePage(props) {
             }, body: JSON.stringify({
                 'course_id':
             })
+=======
+>>>>>>> 006f5e5e125d7ad45e486a6b3e0f1bcb45d68122
 
-        }
+    const toggleModal = () => {
+        setModalOpen(!modalOpen)
     }
-    console.log(needHelp)
-    console.log(queue)
-    return (
-        <div id="home-page">
-            <h1 id="welcome-header">Welcome Back, {firstName}.</h1>
 
-            <h2>Help a Student</h2>
-            <div className='cards-row'>
-                {createCards()}
+    const updateProblemText = (e) => {
+        setProblem(e.target.value)
+    }
+
+    const onClick = () => {
+        joinQueue(currentCourseId, problem)
+    }
+    
+    console.log(problem)
+
+    return (
+        <Fragment>
+            <div id="home-page">
+                <h1 id="welcome-header">Welcome Back, {firstName}.</h1>
+
+                <h2>Help a Student</h2>
+                <div className='cards-row'>
+                    {createCards()}
+                </div>
+                <div>
+                    <h2>Ask for Help</h2>
+                    <div className='help-chips-row'>
+                        {createHelpChips()}
+                    </div>
+                </div>
             </div>
-            <div className='join-queue'>
-                {createJoinButtons())}
-            </div>
-        </div>
+
+            <Modal isOpen={modalOpen}>
+                <ModalHeader toggle={toggleModal}>
+                    Ask for Help in {currentCourse}
+                </ModalHeader>
+                <ModalBody>
+                    <Input type="textarea" placeholder='Describe your problem...' onChange={updateProblemText}></Input>
+                </ModalBody>
+                <ModalFooter>
+                    <div className='modal-footer-row'>
+                        <button className='button-secondary'>Cancel</button>
+                        <button className='button-primary' disabled={problem === ""} onClick={onClick}>Join Queue</button>
+                    </div>
+                </ModalFooter>
+            </Modal>
+        </Fragment>
     )
 }
 
