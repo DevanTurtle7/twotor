@@ -6,6 +6,7 @@ import { HashRouter as Router, Routes, Route, IndexRedirect } from 'react-router
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import LoginPage from './pages/LoginPage';
+import LoginVerifyWrapper from './components/LoginVerifyWrapper';
 
 function App() {
     const [universities, setUniversities] = useState({})
@@ -24,9 +25,9 @@ function App() {
         <Router>
             <Routes>
                 <Route path='/' element={<WelcomePage />} />
-                <Route exact path='/createAccount' element={<SetupPage universities={universities} />} />
-                <Route exact path='/chat' element={<ChatPage/>} />
-                <Route exact path='/home' element={<HomePage/>} />
+                <Route exact path='/createAccount' element={<LoginVerifyWrapper reverse><SetupPage universities={universities} /></LoginVerifyWrapper>} />
+                <Route exact path='/chat' element={<LoginVerifyWrapper><ChatPage/></LoginVerifyWrapper>} />
+                <Route exact path='/home' element={<LoginVerifyWrapper><HomePage/></LoginVerifyWrapper>} />
                 <Route exact path='/login' element={<LoginPage/>} />
             </Routes>
         </Router>
