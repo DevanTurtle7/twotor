@@ -9,6 +9,13 @@ class Account(Resource):
         return get_first_name(request.cookies.get('session'))
 
 
+class GetId(Resource):
+    def get(self):
+        session_key = request.headers['authorization']
+        user_id = authenticate_session(session_key)
+        return jsonify({'id': user_id})
+
+
 class Login(Resource):
     def get(self):
         session_key = request.cookies.get('session')
