@@ -6,6 +6,9 @@
 .cards-row {
     display: flex;
     flex-flow: row;
+    margin-bottom: 50px;
+    overflow-x: scroll;
+    padding-bottom: 10px;
 }
 
 .help-chips-row {
@@ -19,4 +22,10 @@
     flex-flow: row;
     justify-content: space-between;
     width: 100%;
+}
+
+.tutor-card-footer {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
 }

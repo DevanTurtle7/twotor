@@ -46,8 +46,11 @@ function HomePage(props) {
             let course = current.course
             let userId = current.user_id
 
+            console.log(current)
+
             cards.push(<Card
                 name={name}
+                description={description}
                 course={courseName}
                 userId={userId}
                 key={name + i}

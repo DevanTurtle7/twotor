@@ -28,7 +28,7 @@ function Card(props) {
             method: "POST",
             headers: {
                 'Authorization': getCookie('cookie'),
-                'Content-Type': 'application/json' ,
+                'Content-Type': 'application/json',
             }, body: JSON.stringify({
                 'course_id': props.course_id
             })
@@ -41,7 +41,7 @@ function Card(props) {
             method: "POST",
             headers: {
                 'Authorization': getCookie('cookie'),
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             }, body: JSON.stringify({
                 'receiver': props.userId
             })
@@ -50,10 +50,16 @@ function Card(props) {
         })
     }
 
+    console.log(props)
+
     return (
         <div className="tutor-card">
             <h2>{props.name}</h2>
-            <button onClick={onClick}>Tutor</button>
+            <Chip text={props.course} active={true} onClick={()=>{}}/>
+            <p>{props.description}</p>
+            <div className='tutor-card-footer'>
+                <button onClick={onClick} className='button-primary'>Tutor</button>
+            </div>
         </div>
     )
 }
