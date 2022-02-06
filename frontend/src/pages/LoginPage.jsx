@@ -31,7 +31,6 @@ function LoginPage(props) {
                 setInvalidLogin(true)
             }
         });
-
     }
 
     const cancel = () => {
