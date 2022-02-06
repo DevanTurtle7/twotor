@@ -13,18 +13,26 @@ def join_chat(user_id, chatting_with):
     sql = """
     UPDATE accounts
     SET chatting_with = %s
-    WHERE user_id = %s
+    WHERE user_id = %s;
+    UPDATE accounts
+    SET chatting_with = %s
+    WHERE user_id = %s;
+    DELETE FROM help_queue
+    WHERE user_id = %s;
     """
-    params = [chatting_with, user_id]
+    params = [chatting_with, user_id, user_id, chatting_with, chatting_with]
     return db.exec_commit(sql, params)
 
 def leave_chat(user_id, chatting_with):
     sql = """
     UPDATE accounts 
     SET chatting_with = %s
-    WHERE user_id = %s
+    WHERE user_id = %s;
+    UPDATE accounts 
+    SET chatting_with = %s
+    WHERE user_id = %s;
     """
-    params = [chatting_with, user_id]
+    params = [chatting_with, user_id, user_id, chatting_with]
     return db.exec_commit(sql, params)
 
 
