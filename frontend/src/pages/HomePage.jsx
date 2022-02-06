@@ -4,6 +4,7 @@ import Chip from '../components/Chip';
 import { Fragment, useEffect, useState } from 'react';
 import { Modal, ModalBody, ModalHeader, ModalFooter, Input } from 'reactstrap'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function HomePage(props) {
     const [firstName, setFirstName] = useState('User');
@@ -31,6 +32,18 @@ function HomePage(props) {
             }
         }
         return null;
+    }
+
+    const getFirstName = () => {
+        fetch('http://ndawson.student.rit.edu/getname', {
+            method: "GET",
+            headers: {
+                'Authorization': getCookie('cookie'),
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json()).then(response => {
+            setFirstName(response)
+        })
     }
 
     const createCards = () => {
