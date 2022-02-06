@@ -7,8 +7,14 @@ from db_message import *
 
 class CreateChat(Resource):
     def post(self):
-        sender_id = request.form['sender']
-        receiver_id = request.form['receiver']
+        session_key = request.cookies.get('session')
+        sender_id = authenticate_session(session_key)
+
+        if sender_id is None:
+            return 'Not authenticated.'
+
+        sender_id = sender_id[0]
+        receiver_id = get_chatter(session_key)
         time_sent = datetime.now()
         message = request.form['message-input']
 
