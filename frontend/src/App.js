@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import LoginVerifyWrapper from './components/LoginVerifyWrapper';
+import LogoutPage from './pages/LogoutPage';
 
 function App() {
     const [universities, setUniversities] = useState({})
@@ -29,6 +30,7 @@ function App() {
                 <Route exact path='/chat' element={<LoginVerifyWrapper><ChatPage/></LoginVerifyWrapper>} />
                 <Route exact path='/home' element={<LoginVerifyWrapper><HomePage/></LoginVerifyWrapper>} />
                 <Route exact path='/login' element={<LoginPage/>} />
+                <Route exact path='/logout' element={<LogoutPage/>} />
             </Routes>
         </Router>
     );
