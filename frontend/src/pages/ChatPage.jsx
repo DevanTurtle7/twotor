@@ -2,6 +2,7 @@ import '../style/ChatPage.css'
 import { Input } from 'reactstrap';
 import { MdSend } from "react-icons/md";
 import ChatBubble from '../components/ChatBubble'
+import { useState } from 'react';
 
 function ChatPage(props) {
     const messages = [
@@ -24,8 +25,48 @@ function ChatPage(props) {
         {
             sender: 1,
             message: "hello"
+        }, {
+            sender: 1,
+            message: "ajdlkasjldkajs laksjdlka sjlkjdlka jlkdjaslkjkals jdlk ajklj lkasj lkasjlkas jlk asjlkd jlkasj lksjlas lkajlksjlka jl jl"
+        },
+        {
+            sender: 1,
+            message: "hello"
+        },
+        {
+            sender: 1,
+            message: "hello"
+        },
+        {
+            sender: 0,
+            message: "hello"
+        },
+        {
+            sender: 1,
+            message: "hello"
+        },
+        {
+            sender: 0,
+            message: "ashjdkaj kdjaklsjdkl jaslkdj lkasjlkd jaklsdjlkasjlk djalkj sdlkaslkjdlkaj sldk "
+        },        {
+            sender: 0,
+            message: "asdhj jkasjlkasdlkjas dlalklkl lj ljfd ljd jldjlkdjldfklj gdljflkjdflk dlkj ldkdlk j"
+        },        {
+            sender: 0,
+            message: "asldjias jdlalid jlaksj ldjalkj dlkjaslk d"
+        } ,       {
+            sender: 0,
+            message: "ashjdkaj kdjaklsjdkl jaslkdj lkasjlkd jaklsdjlkasjlk djalkj sdlkaslkjdlkaj sldk "
+        },        {
+            sender: 0,
+            message: "asdhj jkasjlkasdlkjas dlalklkl lj ljfd ljd jldjlkdjldfklj gdljflkjdflk dlkj ldkdlk j"
+        },        {
+            sender: 0,
+            message: "asldjias jdlalid jlaksj ldjalkj dlkjaslk d"
         },
     ]
+
+    const [text, setText] = useState("")
 
     const createChatBubbles = () => {
         const bubbles = []
@@ -52,6 +93,15 @@ function ChatPage(props) {
         return bubbles
     }
 
+    const textChanged = (e) => {
+        setText(e.target.value)
+        console.log(e.target.value)
+    }
+
+    const sendMessage = () => {
+
+    }
+
     return (
         <div id="chat-page">
             <div id="chat-history">
@@ -59,10 +109,10 @@ function ChatPage(props) {
             </div>
             <div id="message-bar">
                 <div id="input-container">
-                    <Input placeholder='Send Message' type='text' id='message-input' />
+                    <Input placeholder='Send Message' type='text' id='message-input' onChange={textChanged}/>
                 </div>
                 <div id="button-container">
-                    <button className='circle-button'>
+                    <button className='circle-button' onClick={sendMessage}>
                         <MdSend />
                     </button>
                 </div>

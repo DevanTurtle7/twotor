@@ -12,6 +12,8 @@
     margin-right: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
+    padding-top: 10px;
+    overflow-y: scroll;
 }
 
 #message-bar {
