@@ -71,8 +71,8 @@ function SetupPage(props) {
             let expire = 60 * 60 * 24
 
             document.cookie = `cookie=${cookie}; max-age=${expire}`
+            navigate('/home')
         });
-        navigate('/home')
     }
 
     const currentCompleted = () => {
