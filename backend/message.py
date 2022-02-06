@@ -45,9 +45,12 @@ class ListChats(Resource):
 
 class JoinChat(Resource):
     def post(self):
-        session_key = request.cookies.get('session')
+        print(69)
+        session_key = request.cookies.get('cookie')
         user_id = authenticate_session(session_key)
-        chatting_with = request.form['receiver']
+        print("USER_ID", user_id)
+        chatting_with = request.json['receiver']
+        print("CHATTING", chatting_with)
         if user_id is None:
             return 'Not authenticated.'
 

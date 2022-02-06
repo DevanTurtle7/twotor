@@ -62,7 +62,7 @@ def get_password_hash(username):
 def update_session_key(username, new_session_key):
     sql = """
     UPDATE accounts
-    SET key_expire = NOW() + interval '15 minutes',
+    SET key_expire = NOW() + interval '1 day',
     session_key = %s
     WHERE username = %s;
     """
