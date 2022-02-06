@@ -45,7 +45,28 @@ function SetupPage(props) {
         navigate('/')
     }
 
+    const setToArray = (set) => {
+        let array = []
+
+        set.forEach((current) => {
+            array.push(current)
+        })
+
+        return array
+    }
+
     const finish = () => {
+        const data = {
+            "first_name": accountInfo["first_name"],
+            "last_name": accountInfo["last_name"],
+            "email": accountInfo["email"],
+            "username": accountInfo["username"],
+            "password": accountInfo["password"],
+            "canHelp": setToArray(canHelp),
+            "helpWith": setToArray(helpWith),
+            "university_id": university
+        };
+        axios.post('http://ndawson.student.rit.edu/signup', data);
         navigate('/home')
     }
 

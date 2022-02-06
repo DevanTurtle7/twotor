@@ -1,3 +1,5 @@
+import psycopg2.errors
+
 from database import db
 
 
@@ -8,7 +10,10 @@ def join_queue(user_id, course_id, description):
     VALUES(%s, %s, %s)
     """
     params = [user_id, course_id, description]
-    return db.exec_commit(sql, params)
+    try:
+        return db.exec_commit(sql, params)
+    except psycopg2.errors.UniqueViolation:
+        return None
 
 
 def leave_queue(user_id, course_id):
