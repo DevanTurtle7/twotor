@@ -9,13 +9,18 @@
 #chat-history {
     display: flex;
     flex-flow: column;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    overflow-y: scroll;
 }
 
 #message-bar {
     display: flex;
     flex-flow: row;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .circle-button {
@@ -27,6 +32,13 @@
     height: 45px;
     padding: 0px;
     text-align: center;
+    transition: background-color .3s;
+}
+
+@media (hover: hover) {
+    .circle-button:hover {
+        background-color: var(--primary-bg-color-hover);
+    }
 }
 
 #button-container {
@@ -42,4 +54,78 @@
 #input-container {
     width: 80vw;
     margin-right: 5px;
+}
+
+.chat-bubble {
+    max-width: 70vw;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.chat-bubble p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.chat-bubble.sent {
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.chat-bubble.recieved {
+    background-color: var(--secondary-bg-color);
+    color: var(--secondary-text-color);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.chat-bubble.first {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.chat-bubble.last {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.bubble-row {
+    display: flex;
+    flex-flow: row;
+}
+
+.bubble-row.right {
+    justify-content: flex-end;
+}
+
+.bubble-row.left {
+    justify-content: flex-start;
+}
+
+.message-label {
+    font-weight: 400;
+    margin-left: 30px;
+    margin-bottom: 0px;
+}
+
+#navbar {
+    height: 70px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.back-arrow {
+    margin-bottom: 4px;
+    margin-right: 8px;
 }

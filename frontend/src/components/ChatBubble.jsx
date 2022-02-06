@@ -5,7 +5,9 @@ function ChatBubble(props) {
 
         if (props.first === true) {
             classNames += " first"
-        } else if (props.last === true) {
+        }
+
+        if (props.last === true) {
             classNames += " last"
         }
 
@@ -18,8 +20,24 @@ function ChatBubble(props) {
         return classNames
     }
 
+    const getRowClassNames = () => {
+        let classNames = 'bubble-row'
+
+        if (props.sent === true) {
+            classNames += " right"
+        } else {
+            classNames += " left"
+        }
+
+        return classNames
+    }
+
     return (
-        <div className={getClassNames()}>{props.text}</div>
+        <div className={getRowClassNames()}>
+            <div className={getClassNames()}>
+                <p>{props.text}</p>
+            </div>
+        </div>
     )
 }
 
