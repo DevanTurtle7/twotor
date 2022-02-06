@@ -1,6 +1,6 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
-DROP TABLE IF EXISTS universities, subjects, courses, accounts, need_help, can_tutor, help_queue CASCADE;
+DROP TABLE IF EXISTS universities, subjects, courses, accounts, need_help, can_tutor, help_queue, message_log CASCADE;
 
 CREATE TABLE universities (
     id SERIAL PRIMARY KEY,
@@ -32,6 +32,8 @@ CREATE TABLE accounts (
     password VARCHAR(128) NOT NULL, -- sha512 produces 128bit hex number
     session_key VARCHAR(32) UNIQUE,
     key_expire TIMESTAMP
+    chatting_with user_id REFERENCES accounts ON DELETE SET NULL
+
 );
 
 CREATE TABLE need_help (
@@ -51,4 +53,12 @@ CREATE TABLE help_queue (
     course_id INTEGER REFERENCES courses ON DELETE CASCADE,
     description TEXT,
     PRIMARY KEY (user_id, course_id)
+);
+
+CREATE TABLE message_log (
+    id SERIAL PRIMARY KEY,
+    sender_id INTEGER REFERENCES accounts ON DELETE CASCADE,
+    receiver_id INTEGER REFERENCES accounts ON DELETE CASCADE,
+    time_sent TIMESTAMP,
+    message TEXT
 );

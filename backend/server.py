@@ -6,6 +6,7 @@ from auth import Login, CreateAccount, Logout
 from welcome_api import ListSubjects, ListCourses, ListUniversities
 from queue import *
 from update_course import *
+from message import *
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -47,6 +48,13 @@ api.add_resource(AddHelpCourse, '/addHelp')
 api.add_resource(AddTutorCourse, '/addTutor')
 api.add_resource(DelHelpCourse, '/delHelp')
 api.add_resource(DelTutorCourse, '/delTutor ')
+
+# =============
+# Chat
+api.add_resource(CreateChat, '/createChat')
+api.add_resource(ListChats, '/chatList')
+api.add_resource(JoinChat, '/joinChat')
+api.add_resource(LeaveChat, '/leaveChat')
 
 if __name__ == '__main__':
     app.run(debug=True)
