@@ -25,9 +25,11 @@ class ListSubjects(Resource):
 class ListCourses(Resource):
     def get(self, subject_id):
         sql = """
-        SELECT id, number, name
+        SELECT courses.id, courses.name, CONCAT(subjects.code, '-', number) code
         FROM courses
+        INNER JOIN subjects
+        ON subjects.id = %s
         WHERE subject_id = %s
         """
-        return jsonify(db.exec_get_all_json(sql, subject_id))
+        return jsonify(db.exec_get_all_json(sql, (subject_id, subject_id)))
 

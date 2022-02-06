@@ -42,12 +42,14 @@ class JoinQueue(Resource):
         description = request.json['description']
 
         if course_id:
-            join_queue(user_id, course_id, description)
+            result = join_queue(user_id, course_id, description)
+            if result is None:
+                return {'error': 'You are already in queue for this course.'}
 
-            response = make_response({'join queue': True})
+            response = make_response({'success': True})
             return response
 
-        return {'join queue': False}
+        return {'error': 'Error.'}
 
 
 class LeaveQueue(Resource):

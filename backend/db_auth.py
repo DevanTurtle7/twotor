@@ -116,7 +116,7 @@ def create_need_help(user_id, courses):
     (user_id, course_id)
     VALUES %s
     """
-    params = [(user_id, x) for x in courses]
+    params = [(user_id, x['id']) for x in courses]
     cur = db.conn.cursor()
     return execute_values(cur, sql, params)
 
@@ -127,7 +127,7 @@ def create_can_tutor(user_id, courses):
     (user_id, course_id)
     VALUES %s
     """
-    params = [(user_id, x) for x in courses]
+    params = [(user_id, x['id']) for x in courses]
     cur = db.conn.cursor()
     return execute_values(cur, sql, params)
 

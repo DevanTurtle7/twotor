@@ -49,14 +49,13 @@ class CreateAccount(Resource):
         last_name = request.json['last_name']
         email = request.json['email']
         university_id = request.json['university_id']
-        need_help = request.json['need_help']
-        can_tutor = request.json['can_tutor']
+        need_help = request.json['helpWith']
+        can_tutor = request.json['canHelp']
         
         # verify new account
         if username and password and first_name and last_name and email and university_id and need_help and can_tutor:
             # Create account
             user_id = create_account(username, password, email, first_name, last_name, university_id)
-            print(user_id, can_tutor, need_help)
             create_can_tutor(user_id, can_tutor)
             create_need_help(user_id, need_help)
 

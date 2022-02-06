@@ -35,15 +35,15 @@ CREATE TABLE accounts (
 );
 
 CREATE TABLE need_help (
-    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES accounts ON DELETE CASCADE,
-    course_id INTEGER REFERENCES courses ON DELETE CASCADE
+    course_id INTEGER REFERENCES courses ON DELETE CASCADE,
+    PRIMARY KEY (user_id, course_id)
 );
 
 CREATE TABLE can_tutor (
-    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES accounts ON DELETE CASCADE,
-    course_id INTEGER REFERENCES courses ON DELETE CASCADE
+    course_id INTEGER REFERENCES courses ON DELETE CASCADE,
+    PRIMARY KEY (user_id, course_id)
 );
 
 CREATE TABLE help_queue (

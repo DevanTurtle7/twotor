@@ -31,17 +31,17 @@ function SubjectForm(props) {
         }
     })
 
-    const toggleCourse = (courseName) => {
-        if (selected.has(courseName)) {
-            setSelected(prev => new Set([...prev].filter(x => x !== courseName)))
+    const toggleCourse = (course) => {
+        if (selected.has(course)) {
+            setSelected(prev => new Set([...prev].filter(x => x !== course)))
         } else {
-            setSelected(prev => new Set(prev.add(courseName)))
+            setSelected(prev => new Set(prev.add(course)))
         }
         setNeedUpdate(true)
     }
 
-    const removeCourse = (courseName) => {
-        setSelected(prev => new Set([...prev].filter(x => x !== courseName)))
+    const removeCourse = (course) => {
+        setSelected(prev => new Set([...prev].filter(x => x !== course)))
         setNeedUpdate(true)
     }
 
@@ -61,15 +61,13 @@ function SubjectForm(props) {
         if (subject !== null && subjectCode !== undefined) {
             for (let i = 0; i < courses.length; i++) {
                 let current = courses[i]
-                let number = current.number
-                let courseName = subjectCode + "-" + number
-                let active = selected.has(courseName)
+                let active = selected.has(current)
 
                 chips.push(<Chip
-                    text={courseName}
-                    onClick={toggleCourse}
+                    text={current.code}
+                    onClick={() => {toggleCourse(current)}}
                     active={active}
-                    key={courseName}
+                    key={current.id}
                 />)
             }
         }
@@ -79,14 +77,13 @@ function SubjectForm(props) {
 
     const getSelectedChips = () => {
         const chips = []
-
         selected.forEach((current) => {
             chips.push(<Chip
-                text={current}
+                text={current.code}
                 active={true}
                 canDelete={true}
                 onDelete={removeCourse}
-                key={current}
+                key={current.id}
             />)
         })
 

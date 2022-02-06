@@ -1,4 +1,7 @@
+import psycopg2
+
 from database import db
+
 
 def add_help_course(user_id, course_id):
     sql = """
@@ -7,7 +10,12 @@ def add_help_course(user_id, course_id):
     VALUE(%s, %s)
     """
     params = [user_id, course_id]
-    return db.exec_commit(sql, params)
+
+    try:
+        return db.exec_commit(sql, params)
+    except psycopg2.errors.UniqueViolation:
+        return None
+
 
 def del_help_course(user_id, course_id):
     sql = """
@@ -17,6 +25,7 @@ def del_help_course(user_id, course_id):
     params = [user_id, course_id]
     return db.exec_commit(sql, params)
 
+
 def add_tutor_course(user_id, course_id):
     sql = """
     INSERT INTO can_tutor
@@ -24,7 +33,11 @@ def add_tutor_course(user_id, course_id):
     VALUE(%s, %s)
     """
     params = [user_id, course_id]
-    return db.exec_commit(sql, params)
+    try:
+        return db.exec_commit(sql, params)
+    except psycopg2.errors.UniqueViolation:
+        return None
+
 
 def del_tutor_course(user_id, course_id):
     sql = """
@@ -33,4 +46,3 @@ def del_tutor_course(user_id, course_id):
     """
     params = [user_id, course_id]
     return db.exec_commit(sql, params)
-
