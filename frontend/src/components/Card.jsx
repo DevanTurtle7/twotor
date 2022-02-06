@@ -43,7 +43,7 @@ function Card(props) {
                 'Authorization': getCookie('cookie'),
                 'Content-Type': 'application/json' 
             }, body: JSON.stringify({
-                'receiver': 1
+                'receiver': props.userId
             })
         }).then(response => response.json()).then(response => {
             navigate('/chat')
