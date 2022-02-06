@@ -73,6 +73,7 @@ function ChatPage(props) {
                 'message-input': text
             })
         }).then(response => response.json()).then(response => {
+            setText("")
         })
     }
 
@@ -170,7 +171,7 @@ function ChatPage(props) {
             </div>
             <div id="message-bar">
                 <div id="input-container">
-                    <Input placeholder='Send Message' type='text' id='message-input' onKeyPress={onKeyPress} onChange={textChanged} />
+                    <Input placeholder='Send Message' type='text' value={text} id='message-input' onKeyPress={onKeyPress} onChange={textChanged} />
                 </div>
                 <div id="button-container">
                     <button className='circle-button' onClick={sendMessage}>
