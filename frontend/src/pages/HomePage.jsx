@@ -35,14 +35,14 @@ function HomePage(props) {
     }
 
     fetch('http://ndawson.student.rit.edu/getname', {
-            method: "GET",
-            headers: {
-                'Authorization': getCookie('cookie'),
-                'Content-Type': 'application/json'
-            }
-        }).then(response => response.json()).then(response => {
-            setFirstName(response)
-        })
+        method: "GET",
+        headers: {
+            'Authorization': getCookie('cookie'),
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json()).then(response => {
+        setFirstName(response)
+    })
 
     const createCards = () => {
         const cards = []
@@ -146,10 +146,17 @@ function HomePage(props) {
         navigate('/chat')
     }
 
+    const logout = () => {
+        navigate('/logout')
+    }
+
     return (
         <Fragment>
             <div id="home-page">
-                <h1 id="welcome-header">Welcome Back, {firstName}.</h1>
+                <div className='header-row'>
+                    <h1 id="welcome-header">Welcome Back, {firstName}.</h1>
+                    <button className='button-secondary' onClick={logout} id='logout-btn'>Sign Out</button>
+                </div>
 
                 <h2>Help a Student</h2>
                 <div className='cards-row'>

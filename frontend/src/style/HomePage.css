@@ -1,6 +1,7 @@
 #home-page {
     margin-top: 50px;
     margin-left: 50px;
+    margin-right: 50px;
 }
 
 .cards-row {
@@ -36,4 +37,16 @@
 
 .tutor-card .chip {
     margin-bottom: 10px;
+}
+
+.header-row {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logout-btn {
+    height: fit-content;
+    width: fit-content;
 }
