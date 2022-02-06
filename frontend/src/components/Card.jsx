@@ -5,13 +5,30 @@ import { useNavigate } from 'react-router-dom';
 function Card(props) {
     const navigate = useNavigate()
 
+    const getCookie = (cname) => {
+        // Code from w3 schools :)
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return null;
+    }
+
     const onClick = async () => {
         fetch('http://ndawson.student.rit.edu/leaveQueue', {
             method: "POST",
             headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
-                "Access-Control-Max-Age": 2592000, // 30 days
+                'Authorization': getCookie('cookie'),
+                'Content-Type': 'application/json' ,
             }, body: JSON.stringify({
                 'course_id': props.course_id
             })
@@ -22,14 +39,13 @@ function Card(props) {
         fetch('http://ndawson.student.rit.edu/joinChat', {
             method: "POST",
             headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
-                "Access-Control-Max-Age": 2592000, // 30 days
+                'Authorization': getCookie('cookie'),
+                'Content-Type': 'application/json' 
             }, body: JSON.stringify({
-                'receiver': props.id
+                'receiver': 1
             })
         }).then(response => response.json()).then(response => {
-            console.log(response)
+            navigate('/chat')
         })
     }
 
