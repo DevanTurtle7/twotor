@@ -34,9 +34,7 @@ class Login(Resource):
             update_session_key(username, new_session_key)
 
             # Send back response with cookie
-            res = make_response({'valid': True})
-            res.set_cookie('session', new_session_key, max_age=900)
-            return res
+            return jsonify({'valid': True, 'cookie': new_session_key})
 
         return jsonify({'valid': False})
 
@@ -48,9 +46,7 @@ class Logout(Resource):
             logout(session_key)
 
             # Send back response with deleted cookie
-            res = make_response({'logout': True})
-            res.set_cookie('session', '', max_age=0)
-            return res
+            return jsonify({'logout': True})
 
         return {'logout': False}
 
@@ -81,8 +77,6 @@ class CreateAccount(Resource):
             update_session_key(username, new_session_key)
             
             # Send back with cookie
-            response = make_response({'valid': True})
-            response.set_cookie('session', new_session_key, max_age=900)
-            return response
+            return jsonify({'valid': True, 'cookie': new_session_key})
 
         return{'valid': False}

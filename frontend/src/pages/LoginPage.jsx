@@ -27,11 +27,14 @@ function LoginPage(props) {
         }).then(res => {
             if (res.data.valid) {
                 navigate("/home")
+                let cookie = res.data.cookie
+                let expire = 60*60*24
+
+                document.cookie = `cookie=${cookie}; max-age=${expire}`
             } else {
                 setInvalidLogin(true)
             }
         });
-
     }
 
     const cancel = () => {

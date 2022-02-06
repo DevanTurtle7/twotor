@@ -1,5 +1,7 @@
 import '../style/HomePage.css'
 import Card from '../components/Card'
+import axios from 'axios';
+import { useState } from 'react';
 
 const data = [
     {
@@ -21,6 +23,12 @@ const data = [
 ]
 
 function HomePage(props) {
+    const [firstName, setFirstName] = useState('User');
+    axios.get('http://ndawson.student.rit.edu/getname').then(res => {
+        console.log(res.data);
+        setFirstName(res.data);
+    })
+
     const createCards = () => {
         const cards = []
         console.log(data)
@@ -41,7 +49,7 @@ function HomePage(props) {
     }
     return (
         <div id="home-page">
-            <h1 id="welcome-header">Welcome Back, Devan.</h1>
+            <h1 id="welcome-header">Welcome Back, {firstName}.</h1>
 
             <h2>Help a Student</h2>
             <div className='cards-row'>
