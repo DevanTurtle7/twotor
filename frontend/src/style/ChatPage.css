@@ -30,6 +30,13 @@
     height: 45px;
     padding: 0px;
     text-align: center;
+    transition: background-color .3s;
+}
+
+@media (hover: hover) {
+    .circle-button:hover {
+        background-color: var(--primary-bg-color-hover);
+    }
 }
 
 #button-container {
