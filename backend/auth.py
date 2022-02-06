@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from flask import request, make_response
+from flask import request, make_response, jsonify
 
 from db_auth import *
 
@@ -7,8 +7,8 @@ from db_auth import *
 class Login(Resource):
     def post(self):
         # Retrieve username and password from body of request
-        username = request.form['username']
-        password = request.form['password']
+        username = request.json['username']
+        password = request.json['password']
 
         # Verify password
         if username and password and validate(username, password):
@@ -24,7 +24,7 @@ class Login(Resource):
             res.set_cookie('session', new_session_key, max_age=900)
             return res
 
-        return {'valid': False}
+        return jsonify({'valid': False})
 
 
 class Logout(Resource):
