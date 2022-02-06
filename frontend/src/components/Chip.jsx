@@ -5,7 +5,7 @@ function Chip(props) {
         let canDelete = props.canDelete === true
 
         if (!canDelete) {
-            props.onClick(props.text)
+            props.onClick(props.data)
         }
     }
 
@@ -26,8 +26,9 @@ function Chip(props) {
     }
 
     const onDelete = () => {
+        console.log('joaisj')
         if (props.onDelete !== undefined) {
-            props.onDelete(props.text)
+            props.onDelete(props.data)
         }
     }
 

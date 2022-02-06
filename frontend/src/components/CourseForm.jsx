@@ -64,10 +64,12 @@ function SubjectForm(props) {
                 let active = selected.has(current)
 
                 chips.push(<Chip
+                    data={current}
                     text={current.code}
-                    onClick={() => {toggleCourse(current)}}
+                    onClick={(x) => {
+                    toggleCourse(x)}}
                     active={active}
-                    key={current.id}
+                    key={i + current.code}
                 />)
             }
         }
@@ -79,11 +81,12 @@ function SubjectForm(props) {
         const chips = []
         selected.forEach((current) => {
             chips.push(<Chip
+                data={current}
                 text={current.code}
                 active={true}
                 canDelete={true}
                 onDelete={removeCourse}
-                key={current.id}
+                key={current.code}
             />)
         })
 
