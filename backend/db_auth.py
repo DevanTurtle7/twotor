@@ -105,6 +105,18 @@ def get_chatter(session_key):
     """
     return db.exec_get_one(sql, session_key)
 
+def get_chatter_name(session_key):
+    sql = """
+    SELECT first_name, last_name
+    FROM accounts
+    WHERE id =
+    (SELECT chatting_with
+    FROM accounts
+    WHERE session_key =%s AND
+    key_expire > NOW());
+    """
+    return db.exec_get_all_json(sql, session_key)
+
 
 def logout(session_key):
     sql = """
