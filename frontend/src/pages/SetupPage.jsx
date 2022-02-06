@@ -66,7 +66,12 @@ function SetupPage(props) {
             "helpWith": setToArray(helpWith),
             "university_id": university
         };
-        axios.post('http://ndawson.student.rit.edu/signup', data);
+        axios.post('http://ndawson.student.rit.edu/signup', data).then(res => {
+            let cookie = res.data.cookie
+            let expire = 60 * 60 * 24
+
+            document.cookie = `cookie=${cookie}; max-age=${expire}`
+        });
         navigate('/home')
     }
 
