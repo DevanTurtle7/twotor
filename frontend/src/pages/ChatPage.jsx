@@ -4,6 +4,7 @@ import { MdSend, MdArrowBack } from "react-icons/md";
 import ChatBubble from '../components/ChatBubble'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function ChatPage(props) {
     const messages = [
@@ -100,8 +101,10 @@ function ChatPage(props) {
         console.log(e.target.value)
     }
 
-    const sendMessage = () => {
-
+    const sendMessage = async() => {
+        await axios.post('http://ndawson.student.rit.edu/createChat', {
+        'message-input': text,
+        })
     }
 
     const goBack = () => {
