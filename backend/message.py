@@ -1,5 +1,5 @@
-from flask_restful import Resource
-from flask import request, jsonify
+from flask_restful import Resource, reqparse
+from flask import *
 from datetime import datetime
 
 from db_auth import *
@@ -7,7 +7,7 @@ from db_message import *
 
 class CreateChat(Resource):
     def post(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         sender_id = authenticate_session(session_key)
 
         if sender_id is None:
@@ -26,7 +26,7 @@ class CreateChat(Resource):
 
 class ListChats(Resource):
     def post(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
 
         if user_id is None:
@@ -38,16 +38,20 @@ class ListChats(Resource):
         sql = """
         SELECT sender_id, receiver_id, time_sent, message
         FROM message_log
-        WHERE (sender_id = %s AND receiver_id = ) OR (sender_id =  AND receiver_id = s%)
+        WHERE (sender_id = %s AND receiver_id = %s) OR (sender_id = %s AND receiver_id = %s ) ORDER BY time_sent desc;
         """
         params = [user_id, chatting_with, chatting_with, user_id]
         return jsonify(db.exec_get_all_json(sql, params))
 
 class JoinChat(Resource):
     def post(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
         chatting_with = request.json['receiver']
+
+        print(chatting_with)
+
+        print(user_id)
         if user_id is None:
             return 'Not authenticated.'
 
@@ -58,7 +62,7 @@ class JoinChat(Resource):
 
 class LeaveChat(Resource):
     def post(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
         chatting_with = get_chatter(session_key)
         if user_id is None:

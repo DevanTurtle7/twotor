@@ -7,7 +7,7 @@ from db_queue import *
 
 class ListQueue(Resource):
     def get(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
 
         if user_id is None:
@@ -31,7 +31,7 @@ class ListQueue(Resource):
 
 class JoinQueue(Resource):
     def post(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
 
         if user_id is None:
@@ -54,7 +54,7 @@ class JoinQueue(Resource):
 
 class LeaveQueue(Resource):
     def post(self):
-        session_key = request.cookies.get('session')
+        session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
 
         if user_id is None:
