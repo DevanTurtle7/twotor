@@ -92,14 +92,14 @@ function HomePage(props) {
 
         return buttons
     }
-    const onClick = async() => {
+    const onClick = async () => {
         fetch('http://ndawson.student.rit.edu/joinQueue'), {
         method: "POST",
         headers: {
                 'Authorization': getCookie('cookie'),
                 'Content-Type': 'application/json' ,
             }, body: JSON.stringify({
-                'course_id': props.course_id
+                'course_id':
             })
 
         }

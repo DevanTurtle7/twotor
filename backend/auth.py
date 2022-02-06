@@ -51,7 +51,6 @@ class Logout(Resource):
         session_key = request.cookies.get('session')
         if session_key and session_key_exists(session_key):
             logout(session_key)
-
             # Send back response with deleted cookie
             return jsonify({'logout': True})
 
