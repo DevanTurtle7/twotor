@@ -4,15 +4,35 @@ import { useNavigate } from 'react-router-dom';
 
 function Card(props) {
     const navigate = useNavigate()
-    const onClick = async() => {
-    await axios.post('http://ndawson.student.rit.edu/leaveQueue', {
-        'course_id': props.course_id
+
+    const onClick = async () => {
+        fetch('http://ndawson.student.rit.edu/leaveQueue', {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+                "Access-Control-Max-Age": 2592000, // 30 days
+            }, body: JSON.stringify({
+                'course_id': props.course_id
+            })
+        }).then(response => response.json()).then(response => {
+            console.log(response)
         })
-    await axios.post('http://ndawson.student.rit.edu/joinChat', {
-        'receiver': props.id}).then(res => {
-            navigate("/chat")
+
+        fetch('http://ndawson.student.rit.edu/joinChat', {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+                "Access-Control-Max-Age": 2592000, // 30 days
+            }, body: JSON.stringify({
+                'receiver': props.id
+            })
+        }).then(response => response.json()).then(response => {
+            console.log(response)
         })
     }
+
     return (
         <div className="tutor-card">
             <h2>{props.name}</h2>

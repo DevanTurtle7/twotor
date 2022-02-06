@@ -24,10 +24,12 @@ const data = [
 
 function HomePage(props) {
     const [firstName, setFirstName] = useState('User');
+    /*
     axios.get('http://ndawson.student.rit.edu/getname').then(res => {
         console.log(res.data);
         setFirstName(res.data);
     })
+    */
 
     const createCards = () => {
         const cards = []
