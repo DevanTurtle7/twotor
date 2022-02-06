@@ -77,33 +77,32 @@ function HomePage(props) {
 
         for (let i = 0; i < needHelp.length; i++) {
             let current = needHelp[i]
-            let firstName = current.first_name
-            let lastName = current.last_name
-            let name = firstName + " " + lastName
-            let description = current.description
-            let courseName = current.courseName
-            let course = current.course
-            let userId = current.user_id
+            console.log(current)
+            let courseName = current.code
+            let courseId = current.id
+            let description = " alksdjklasjdklaj lk"
 
             buttons.push(
-            <button className = 'primary-button' onClick={onClick}>Join Queue for {current.courseName}</button>
+                <button className='primary-button' onClick={() => onClick(courseId)} key={i}>Join Queue for {courseName}</button>
             )
         }
 
         return buttons
     }
-    const onClick = async() => {
-        fetch('http://ndawson.student.rit.edu/joinQueue'), {
-        method: "POST",
-        headers: {
-                'Authorization': getCookie('cookie'),
-                'Content-Type': 'application/json' ,
-            }, body: JSON.stringify({
-                'course_id': props.course_id
-            })
 
-        }
+    const onClick = async (id, description) => {
+        fetch('http://ndawson.student.rit.edu/joinQueue', {
+            method: "POST",
+            headers: {
+                'Authorization': getCookie('cookie'),
+                'Content-Type': 'application/json',
+            }, body: JSON.stringify({
+                'course_id': id,
+                description: 'aldjkasljdk '
+            })
+        })
     }
+
     console.log(needHelp)
     console.log(queue)
     return (
@@ -115,7 +114,7 @@ function HomePage(props) {
                 {createCards()}
             </div>
             <div className='join-queue'>
-                {createJoinButtons())}
+                {createJoinButtons()}
             </div>
         </div>
     )
