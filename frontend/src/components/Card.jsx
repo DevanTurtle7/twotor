@@ -9,7 +9,7 @@ function Card(props) {
         'course_id': props.course_id
         })
     await axios.post('http://ndawson.student.rit.edu/joinChat', {
-        'receiver': props.id}).then(res => {
+        'receiver': 1}).then(res => {
             navigate("/chat")
         })
     }
