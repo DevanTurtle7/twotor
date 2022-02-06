@@ -87,6 +87,14 @@ def authenticate_session(session_key):
     """
     return db.exec_get_one(sql, session_key)
 
+def get_chatter(session_key):
+    sql = """
+    SELECT chatting_with
+    FROM accounts
+    WHERE session_key =%s AND
+    key_expire > NOW();
+    """
+    return db.exec_get_one(sql, session_key)
 
 def logout(session_key):
     sql = """
