@@ -15,7 +15,7 @@ body {
     --secondary-text-color-disabled: rgb(100, 100, 100, .5);
     --secondary-bg-color-disabled: rgb(235, 235, 235, .5);
     --primary-text-color: rgb(2, 136, 209);
-    --primary-bg-color: rgb(179, 229, 252);
+    --primary-bg-color: #b3e5fc;
     --primary-text-color-disabled: rgba(2, 136, 209, .5);
     --primary-bg-color-disabled: rgba(179, 229, 252, .5);
     --primary-bg-color-hover: #81D4FA;

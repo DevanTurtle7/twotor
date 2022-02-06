@@ -128,7 +128,7 @@ function ChatPage(props) {
                     'Authorization': getCookie('cookie'),
                     'Content-Type': 'application/json'
                 }
-            }).then(response => response.json()).then(async(response) => {
+            }).then(response => response.json()).then(async (response) => {
                 if (response === null) {
                     console.log('awaitng name')
                     setName('Waiting for Tutor...')
@@ -173,6 +173,7 @@ function ChatPage(props) {
                     {name}
                 </h3>
             </div>
+            <div id="chat-content">
             <div id="chat-history">
                 {createChatBubbles()}
             </div>
@@ -185,6 +186,7 @@ function ChatPage(props) {
                         <MdSend />
                     </button>
                 </div>
+            </div>
             </div>
         </div>
     )
