@@ -11,6 +11,7 @@ function ChatPage(props) {
     const [uid, setUID] = useState(-1)
     const [gettingChats, setGettingChats] = useState(false)
     const [name, setName] = useState("")
+    const [currentCourseId, setCurrentCourseId] = useState(-1)
 
     const getCookie = (cname) => {
         // Code from w3 schools :)
@@ -78,6 +79,17 @@ function ChatPage(props) {
     }
 
     const goBack = async () => {
+        fetch('http://ndawson.student.rit.edu/leaveQueue', {
+            method: "POST",
+            headers: {
+                'Authorization': getCookie('cookie'),
+                'Content-Type': 'application/json' ,
+            }, body: JSON.stringify({
+                'course_id': currentCourseId
+            })
+        }).then(response => response.json()).then(response => {
+            console.log(response)
+        })
         fetch('http://ndawson.student.rit.edu/leaveChat', {
             method: "POST",
             headers: {
