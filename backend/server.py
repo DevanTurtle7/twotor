@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
 
-from auth import Login, CreateAccount, Logout
+from auth import Login, CreateAccount, Logout, Account
 from welcome_api import ListSubjects, ListCourses, ListUniversities
 from queue import *
 from update_course import *
@@ -29,6 +29,10 @@ api.add_resource(Test, '/')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
 api.add_resource(CreateAccount, '/signup')
+
+# =============
+# Account
+api.add_resource(Account, '/getname')
 
 # =============
 # Welcome

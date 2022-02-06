@@ -78,6 +78,15 @@ def session_key_exists(session_key):
     return bool(db.exec_get_one(sql, session_key))
 
 
+def get_first_name(session_key):
+    sql = """
+    SELECT first_name
+    FROM accounts
+    WHERE session_key = %s;
+    """
+    return db.exec_get_one(sql, session_key)
+
+
 def authenticate_session(session_key):
     sql = """
     SELECT id
@@ -95,6 +104,7 @@ def get_chatter(session_key):
     key_expire > NOW();
     """
     return db.exec_get_one(sql, session_key)
+
 
 def logout(session_key):
     sql = """

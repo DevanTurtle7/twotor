@@ -4,7 +4,21 @@ from flask import request, make_response, jsonify
 from db_auth import *
 
 
+class Account(Resource):
+    def get(self):
+        return get_first_name(request.cookies.get('session'))
+
+
 class Login(Resource):
+    def get(self):
+        session_key = request.cookies.get('session')
+        user_id = authenticate_session(session_key)
+
+        if user_id is None:
+            return jsonify({'authenticated': False})
+        else:
+            return jsonify({'authenticated': True})
+
     def post(self):
         # Retrieve username and password from body of request
         username = request.json['username']
