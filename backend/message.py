@@ -7,10 +7,10 @@ from db_message import *
 
 class CreateChat(Resource):
     def post(self):
-        sender_id = request.form['sender_id']
-        receiver_id = request.form['receiver_id']
+        sender_id = request.form['sender']
+        receiver_id = request.form['receiver']
         time_sent = datetime.now()
-        message = request.form['message']
+        message = request.form['message-input']
 
         if sender_id and receiver_id and message:
             create_chat(sender_id, receiver_id, time_sent, message)
@@ -41,7 +41,7 @@ class JoinChat(Resource):
     def post(self):
         session_key = request.cookies.get('session')
         user_id = authenticate_session(session_key)
-        chatting_with = request.form['chatter']
+        chatting_with = request.form['receiver']
         if user_id is None:
             return 'Not authenticated.'
 
