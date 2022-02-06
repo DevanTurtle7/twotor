@@ -127,9 +127,15 @@ function ChatPage(props) {
                     'Authorization': getCookie('cookie'),
                     'Content-Type': 'application/json'
                 }
-            }).then(response => response.json()).then(response => {
-                console.log(response)
-                setName(response.first_name + " " + response.last_name)
+            }).then(response => response.json()).then(async(response) => {
+                if (response === null) {
+                    console.log('awaitng name')
+                    setName('Waiting for Tutor...')
+                    await sleep(5000)
+                    getName()
+                } else {
+                    setName(response.first_name + " " + response.last_name)
+                }
             })
         })
     }

@@ -3,6 +3,7 @@ import Card from '../components/Card'
 import Chip from '../components/Chip';
 import { Fragment, useEffect, useState } from 'react';
 import { Modal, ModalBody, ModalHeader, ModalFooter, Input } from 'reactstrap'
+import { useNavigate } from 'react-router-dom';
 
 function HomePage(props) {
     const [firstName, setFirstName] = useState('User');
@@ -12,6 +13,7 @@ function HomePage(props) {
     const [currentCourse, setCurrentCourse] = useState("")
     const [currentCourseId, setCurrentCourseId] = useState(-1)
     const [problem, setProblem] = useState("")
+    const navigate = useNavigate()
 
     const getCookie = (cname) => {
         // Code from w3 schools :)
@@ -127,10 +129,9 @@ function HomePage(props) {
 
     const onClick = () => {
         joinQueue(currentCourseId, problem)
+        navigate("/chat")
     }
     
-    console.log(problem)
-
     return (
         <Fragment>
             <div id="home-page">
