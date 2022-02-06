@@ -38,7 +38,7 @@ class ListChats(Resource):
         sql = """
         SELECT sender_id, receiver_id, time_sent, message
         FROM message_log
-        WHERE (sender_id = %s AND receiver_id = %s) OR (sender_id = %s AND receiver_id = %s ) ORDER BY time_sent desc;
+        WHERE (sender_id = %s AND receiver_id = %s) OR (sender_id = %s AND receiver_id = %s ) ORDER BY time_sent DESC;
         """
         params = [user_id, chatting_with, chatting_with, user_id]
         return jsonify(db.exec_get_all_json(sql, params))
