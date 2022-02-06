@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 #root {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
     --secondary-text-color: rgb(100, 100, 100);
     --secondary-bg-color: rgb(235, 235, 235);
     --secondary-text-color-disabled: rgb(100, 100, 100, .5);
@@ -11,15 +20,6 @@
     --primary-bg-color-disabled: rgba(179, 229, 252, .5);
     --primary-bg-color-hover: #81D4FA;
     --secondary-bg-color-hover: rgb(210, 210, 210);
-    overflow-x: hidden;
-}
-
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
 }
 
 * {
