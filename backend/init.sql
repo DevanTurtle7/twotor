@@ -31,8 +31,8 @@ CREATE TABLE accounts (
     salt VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL, -- sha512 produces 128bit hex number
     session_key VARCHAR(32) UNIQUE,
-    key_expire TIMESTAMP
-    chatting_with user_id REFERENCES accounts ON DELETE SET NULL
+    key_expire TIMESTAMP,
+    chatting_with INTEGER REFERENCES accounts ON DELETE SET NULL
 
 );
 
