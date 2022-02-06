@@ -72,7 +72,38 @@ function HomePage(props) {
         })
     }, [])
 
+    const createJoinButtons = () => {
+        const buttons = []
 
+        for (let i = 0; i < needHelp.length; i++) {
+            let current = needHelp[i]
+            let firstName = current.first_name
+            let lastName = current.last_name
+            let name = firstName + " " + lastName
+            let description = current.description
+            let courseName = current.courseName
+            let course = current.course
+            let userId = current.user_id
+
+            buttons.push(
+            <button className = 'primary-button' onClick={onClick}>Join Queue for {current.courseName}</button>
+            )
+        }
+
+        return buttons
+    }
+    const onClick = async() => {
+        fetch('http://ndawson.student.rit.edu/joinQueue'), {
+        method: "POST",
+        headers: {
+                'Authorization': getCookie('cookie'),
+                'Content-Type': 'application/json' ,
+            }, body: JSON.stringify({
+                'course_id': props.course_id
+            })
+
+        }
+    }
     console.log(needHelp)
     console.log(queue)
     return (
@@ -82,6 +113,9 @@ function HomePage(props) {
             <h2>Help a Student</h2>
             <div className='cards-row'>
                 {createCards()}
+            </div>
+            <div className='join-queue'>
+                {createJoinButtons())}
             </div>
         </div>
     )
