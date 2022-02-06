@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { FormGroup, Input } from "reactstrap"
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function LoginPage(props) {
     const [username, setUsername] = useState("")
@@ -15,8 +16,19 @@ function LoginPage(props) {
         setPassword(e.target.value)
     }
 
-    const login = () => {
-        navigate("/home")
+    const login = async () => {
+        await axios.post('http://ndawson.student.rit.edu/login', {
+            'username': username,
+            'password': password
+        }).then(res => {
+            if (res.data.valid) {
+                navigate("/home")
+            }
+            else {
+                console.log('BAD LOGIN TODO DEVAN') // TODO DEVAN
+            }
+        });
+        
     }
 
     const cancel = () => {
