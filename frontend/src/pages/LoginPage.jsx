@@ -53,6 +53,7 @@ function LoginPage(props) {
                 <FormGroup>
                     <h4>Username</h4>
                     <Input type="text" onChange={usernameChanged} invalid={invalidLogin} onKeyPress={onKeyPress} />
+                    <br/>
                     <h4>Password</h4>
                     <Input type="password" onChange={passwordChanged} invalid={invalidLogin} onKeyPress={onKeyPress} />
                     <FormFeedback>

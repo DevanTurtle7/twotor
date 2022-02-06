@@ -15,7 +15,11 @@ class GetChattingWith(Resource):
 
 class Account(Resource):
     def get(self):
-        return get_first_name(request.headers['authorization'])
+        name = get_first_name(request.headers['authorization'])
+        if name is None:
+            return 'User'
+        else:
+            return name[0]
 
 
 class GetId(Resource):

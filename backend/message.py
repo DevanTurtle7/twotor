@@ -64,11 +64,10 @@ class LeaveChat(Resource):
     def post(self):
         session_key = request.headers['authorization']
         user_id = authenticate_session(session_key)
-        chatting_with = get_chatter(session_key)
         if user_id is None:
             return 'Not authenticated.'
 
         user_id = user_id[0]
-        leave_chat(user_id, chatting_with)
+        leave_chat(user_id)
 
         return {'Joined chat': True}
