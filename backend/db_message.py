@@ -31,7 +31,7 @@ def join_chat(user_id, chatting_with):
     WHERE user_id = %s;
     """
     db.exec_commit(sql3, chatting_with)
-:
+
 def leave_chat(user_id, chatting_with):
     sql = """
     UPDATE accounts 
