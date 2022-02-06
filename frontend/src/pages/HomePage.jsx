@@ -34,8 +34,7 @@ function HomePage(props) {
         return null;
     }
 
-    const getFirstName = () => {
-        fetch('http://ndawson.student.rit.edu/getname', {
+    fetch('http://ndawson.student.rit.edu/getname', {
             method: "GET",
             headers: {
                 'Authorization': getCookie('cookie'),
@@ -44,7 +43,6 @@ function HomePage(props) {
         }).then(response => response.json()).then(response => {
             setFirstName(response)
         })
-    }
 
     const createCards = () => {
         const cards = []
