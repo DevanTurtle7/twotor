@@ -7,3 +7,16 @@
     display: flex;
     flex-flow: row;
 }
+
+.help-chips-row {
+    display: flex;
+    flex-flow: row;
+    padding-bottom: 10px;
+}
+
+.modal-footer-row {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 100%;
+}

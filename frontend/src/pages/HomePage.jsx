@@ -1,12 +1,17 @@
 import '../style/HomePage.css'
 import Card from '../components/Card'
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import Chip from '../components/Chip';
+import { Fragment, useEffect, useState } from 'react';
+import { Modal, ModalBody, ModalHeader, ModalFooter, Input } from 'reactstrap'
 
 function HomePage(props) {
     const [firstName, setFirstName] = useState('User');
     const [queue, setQueue] = useState([]);
     const [needHelp, setNeedHelp] = useState([])
+    const [modalOpen, setModalOpen] = useState(false)
+    const [currentCourse, setCurrentCourse] = useState("")
+    const [currentCourseId, setCurrentCourseId] = useState(-1)
+    const [problem, setProblem] = useState("")
 
     const getCookie = (cname) => {
         // Code from w3 schools :)
@@ -72,25 +77,7 @@ function HomePage(props) {
         })
     }, [])
 
-    const createJoinButtons = () => {
-        const buttons = []
-
-        for (let i = 0; i < needHelp.length; i++) {
-            let current = needHelp[i]
-            console.log(current)
-            let courseName = current.code
-            let courseId = current.id
-            let description = " alksdjklasjdklaj lk"
-
-            buttons.push(
-                <button className='primary-button' onClick={() => onClick(courseId)} key={i}>Join Queue for {courseName}</button>
-            )
-        }
-
-        return buttons
-    }
-
-    const onClick = async (id, description) => {
+    const joinQueue = async (id, description) => {
         fetch('http://ndawson.student.rit.edu/joinQueue', {
             method: "POST",
             headers: {
@@ -98,25 +85,84 @@ function HomePage(props) {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
                 'course_id': id,
-                description: 'aldjkasljdk '
+                description: description
             })
+        }).then(response => response.json()).then(response => {
+            console.log(response)
         })
     }
 
-    console.log(needHelp)
-    console.log(queue)
-    return (
-        <div id="home-page">
-            <h1 id="welcome-header">Welcome Back, {firstName}.</h1>
+    const openModal = (id, courseName) => {
+        setCurrentCourse(courseName)
+        setCurrentCourseId(id)
+        setModalOpen(true)
+    }
 
-            <h2>Help a Student</h2>
-            <div className='cards-row'>
-                {createCards()}
+    const createHelpChips = () => {
+        const chips = []
+
+        for (let i = 0; i < needHelp.length; i++) {
+            let current = needHelp[i]
+            let courseName = current.code
+            let id = current.id
+
+            chips.push(<Chip
+                text={courseName}
+                onClick={() => { openModal(id, courseName) }}
+                active={true}
+                key={courseName}
+            />)
+        }
+
+        return chips
+    }
+
+    const toggleModal = () => {
+        setModalOpen(!modalOpen)
+    }
+
+    const updateProblemText = (e) => {
+        setProblem(e.target.value)
+    }
+
+    const onClick = () => {
+        joinQueue(currentCourseId, problem)
+    }
+    
+    console.log(problem)
+
+    return (
+        <Fragment>
+            <div id="home-page">
+                <h1 id="welcome-header">Welcome Back, {firstName}.</h1>
+
+                <h2>Help a Student</h2>
+                <div className='cards-row'>
+                    {createCards()}
+                </div>
+                <div>
+                    <h2>Ask for Help</h2>
+                    <div className='help-chips-row'>
+                        {createHelpChips()}
+                    </div>
+                </div>
             </div>
-            <div className='join-queue'>
-                {createJoinButtons()}
-            </div>
-        </div>
+
+            <Modal isOpen={modalOpen}>
+                <ModalHeader toggle={toggleModal}>
+                    Ask for Help in {currentCourse}
+                </ModalHeader>
+                <ModalBody>
+                    <Input type="textarea" placeholder='Describe your problem...' onChange={updateProblemText}></Input>
+                </ModalBody>
+                <ModalFooter>
+                    <div className='modal-footer-row'>
+                        <button className='button-secondary'>Cancel</button>
+                        <button className='button-primary' disabled={problem === ""} onClick={onClick}>Join Queue</button>
+                    </div>
+                </ModalFooter>
+            </Modal>
+        </Fragment>
     )
 }
 
