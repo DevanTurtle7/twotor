@@ -16,7 +16,7 @@ class ListQueue(Resource):
         user_id = user_id[0]
 
         sql = """
-        SELECT first_name, last_name, courses.name course_name, queue.user_id, queue.description
+        SELECT first_name, last_name, courses.name course_name, queue.user_id, queue.description, CONCAT(subjects.code, '-', number) code
         FROM can_tutor tutor
         INNER JOIN help_queue queue
         ON queue.course_id = tutor.course_id
@@ -24,6 +24,8 @@ class ListQueue(Resource):
         ON accounts.id = queue.user_id
         INNER JOIN courses
         ON queue.course_id = courses.id
+        INNER JOIN subjects
+        ON subjects.id = courses.subject_id
         WHERE tutor.user_id = %s;
         """
         return jsonify(db.exec_get_all_json(sql, user_id))

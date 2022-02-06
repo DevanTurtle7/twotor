@@ -8,7 +8,7 @@ function WelcomePage(props) {
             />
             <h5>Connect with real students to get real help.</h5>
             <hr/>
-            <Link to="/login"><button className="btn-primary" id="sign-in">Login</button></Link>
+            <Link to="/login"><button className="button-primary" id="sign-in">Login</button></Link>
             <Link to="/createAccount"><button>Sign Up</button></Link>
         </div>
     )
