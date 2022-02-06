@@ -107,8 +107,11 @@ function ChatPage(props) {
         })
     }
 
-    const goBack = () => {
-        navigate("/home")
+    const goBack = async() => {
+        await axios.post('https://ndawson.student.rit.edu/leaveChat', {
+        }).then(res => {
+            navigate("/home")
+        })
     }
 
     return (
