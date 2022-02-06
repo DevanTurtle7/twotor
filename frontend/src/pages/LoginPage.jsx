@@ -1,3 +1,4 @@
+import '../style/LoginPage.css';
 import { useState } from "react"
 import { FormGroup, Input } from "reactstrap"
 import { useNavigate } from 'react-router-dom';
@@ -25,19 +26,21 @@ function LoginPage(props) {
 
     return (
         <div className="page-col" id="login-page">
-        <FormGroup>
-            <h4>Username</h4>
-            <Input type="text" onChange={usernameChanged}/>
-        </FormGroup>
+        <div id="login-container">
+            <FormGroup>
+                <h4>Username</h4>
+                <Input type="text" onChange={usernameChanged} />
+            </FormGroup>
 
-        <FormGroup>
-            <h4>Password</h4>
-            <Input type="password" onChange={passwordChanged}/>
-        </FormGroup>
+            <FormGroup>
+                <h4>Password</h4>
+                <Input type="password" onChange={passwordChanged} />
+            </FormGroup>
 
-        <div className="form-footer">
-        <button className="button-secondary" onClick={cancel}>Cancel</button>
-        <button className="button-primary" onClick={login}>Sign In</button>
+            <div className="form-footer">
+                <button className="button-secondary" onClick={cancel}>Cancel</button>
+                <button className="button-primary" onClick={login}>Sign In</button>
+            </div>
         </div>
         </div>
     )

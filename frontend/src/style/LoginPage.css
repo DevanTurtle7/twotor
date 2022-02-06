@@ -1,0 +1,12 @@
+#login-page {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#login-container {
+    width: clamp(100px, 100%, 400px);
+    margin-bottom: 50px;
+}
