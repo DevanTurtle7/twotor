@@ -36,6 +36,7 @@ function Card(props) {
             console.log(response)
         })
 
+
         fetch('http://ndawson.student.rit.edu/joinChat', {
             method: "POST",
             headers: {
