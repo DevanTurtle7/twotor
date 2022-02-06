@@ -16,7 +16,7 @@ class CreateChat(Resource):
         sender_id = sender_id[0]
         receiver_id = get_chatter(session_key)
         time_sent = datetime.now()
-        message = request.form['message-input']
+        message = request.json['message-input']
 
         if sender_id and receiver_id and message:
             create_chat(sender_id, receiver_id, time_sent, message)
@@ -48,9 +48,9 @@ class JoinChat(Resource):
         print(69)
         session_key = request.cookies.get('cookie')
         user_id = authenticate_session(session_key)
-        print("USER_ID", user_id)
+
         chatting_with = request.json['receiver']
-        print("CHATTING", chatting_with)
+
         if user_id is None:
             return 'Not authenticated.'
 
